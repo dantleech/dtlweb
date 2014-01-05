@@ -1,0 +1,12 @@
+{% extends "AcmeBasicCmsBundle::layout.html.twig" %}
+{% block title %}<h1>Articles with tag "{{ tag }}"</h1>{% endblock %}
+{% block content %}
+    <div class="cell">
+        <ul>
+        {% for referrer in referrers %}
+                <li><a href="{{ path(referrer) }}">{{ referrer.title }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+

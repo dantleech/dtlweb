@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block main_title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block javascripts %}{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" media="all"  href="{{ asset('cascade/assets/css/cascade/production/build-full.min.css') }}" />
+        <link rel="stylesheet" type="text/css" media="all"  href="{{ asset('cascade/assets/css/site.css') }}" />
+        <!--[if lt IE 8]><link rel="stylesheet" href="assets/css/cascade/production/icons-ie7.min.css"><![endif]-->
+        <!--[if lt IE 9]><script src="assets/js/shim/iehtmlshiv.js"></script><![endif]-->
+        <title>Cascade Framework</title>
+        <meta name="description" content="Professional Frontend framework that makes building websites easier than ever.">
+        <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block stylesheets %}{% endblock %}
+        <style type="text/css">
+            .powered-by {
+                background:url('assets/img/cascade icons/powered-by-black.png');
+            }
+
+            .site-center {
+                background:#2d3538;
+            }
+
+            .site-footer li,.site-footer a {
+                color:#fff;
+                border-color:#fff;
+            }
+
+            .site-footer .site-center {
+                background:#2d3538;
+            }
+
+            .site-footer a:hover {
+                color:#3981a7;
+            }
+
+            .site-center .site-body {
+                margin:0;
+            }
+        </style>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        <script src="assets/js/app.js"></script>
+    </body>
+</html>

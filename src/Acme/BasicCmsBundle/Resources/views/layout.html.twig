@@ -1,0 +1,41 @@
+{% extends "::base.html.twig" %}
+{% block main_title %}Dans Homepage{% endblock %}
+{% block body %}
+    <div class="site-center">
+        <div class="site-header">
+            <div class="col width-fit mobile-width-fit">
+                <div class="cell">
+                    <a href="#" class="logo"></a>
+                </div>
+            </div>
+            <div class="col width-fill mobile-width-fill">
+                <div class="cell">
+                    {{ knp_menu_render('main', {'currentClass': 'current', 'template': 'AcmeBasicCmsBundle::knp_menu.html.twig'}) }}
+                </div>
+            </div>
+        </div>
+        <div class="site-body">
+            <div class="cell">
+                <div class="col">
+                    <div class="cell">
+                        <div class="page-header">
+                            {% block title %}This is a page{% endblock %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col width-3of4">
+                    <div class="col">
+                        {% block content %}{% endblock %}
+                    </div>
+                </div>
+                <div class="col width-1of4">
+                    <div class="cell tags">
+                        <span class="tiny">Tag Cloud</span>
+                        {% render(controller('AcmeBasicCmsBundle:Default:tagCloud')) %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

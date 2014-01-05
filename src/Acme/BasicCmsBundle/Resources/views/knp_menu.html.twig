@@ -1,0 +1,9 @@
+{% extends "knp_menu.html.twig" %}
+{% block list %}
+{% if item.hasChildren and options.depth is not sameas(0) and item.displayChildren %}
+    <ul class="col nav">
+        {{ block('children') }}
+    </ul>
+{% endif %}
+{% endblock %}
+

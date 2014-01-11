@@ -3,10 +3,17 @@
 {% block body %}
     <div class="site-center">
         <div class="site-header">
-            <div class="col width-fit mobile-width-fit">
+            {% set height = 150 %}
+            {% if is_homepage is defined and is_homepage %}
+            {% else %}
+            {% endif %}
+            <div class="cell width4of4" style="overflow: hidden; {% if height is defined %}height: {{ height }}px;{% endif %} background-image: url({{ asset('images/header.jpg') }});">
                 <div class="cell">
-                    <a href="#" class="logo"></a>
+                    <h1>Dans Homepage</h1>
+                    <p>PHP, Javascript, Symfony CMF, etc, etc.
                 </div>
+            </div>
+            <div class="col width-fit mobile-width-fit">
             </div>
             <div class="col width-fill mobile-width-fill">
                 <div class="cell">
@@ -32,6 +39,10 @@
                     <div class="cell tags">
                         <span class="tiny">Tag Cloud</span>
                         {% render(controller('AcmeBasicCmsBundle:Default:tagCloud')) %}
+                    </div>
+                    <div class="cell tags">
+                        <span class="tiny">Recent Posts</span>
+                        {% render(controller('AcmeBasicCmsBundle:Default:recentPosts')) %}
                     </div>
                 </div>
             </div>

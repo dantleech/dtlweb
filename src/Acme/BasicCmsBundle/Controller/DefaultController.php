@@ -16,34 +16,42 @@ class DefaultController extends Controller
         return $this->get('doctrine_phpcr')->getManager();
     }
 
+    protected function getSite()
+    {
+        $site = $this->getDm()->find('Acme\BasicCmsBundle\Document\Site', '/cms');
+
+        return $site;
+    }
+
     /**
      * @Route("/")
      */
     public function indexAction()
     {
-        $site = $this->getDm()->find('Acme\BasicCmsBundle\Document\Site', '/cms');
-        $homepage = $site->getHomepage();
+        $homepage = $this->getSite()->getHomepage();
 
         if (!$homepage) {
             throw $this->createNotFoundException('No homepage configured');
         }
 
         return $this->forward('AcmeBasicCmsBundle:Default:page', array(
-            'contentDocument' => $homepage
+            'contentDocument' => $homepage,
         ));
     }
 
     /**
      * @Template()
      */
-    public function pageAction($contentDocument)
+    public function pageAction($contentDocument, $isHomepage = false)
     {
         $dm = $this->get('doctrine_phpcr')->getManager();
         $posts = $dm->getRepository('Acme\BasicCmsBundle\Document\Post')->findAll();
+        $isHomepage = $this->getSite()->getHomepage() === $contentDocument;
 
         return array(
             'page'  => $contentDocument,
             'posts' => $posts,
+            'is_homepage' => $isHomepage,
         );
     }
 
@@ -161,6 +169,20 @@ class DefaultController extends Controller
 
         return array(
             'post' => $contentDocument,
+        );
+    }
+
+    /**
+     * @Template()
+     */
+    public function recentPostsAction(Request $request)
+    {
+        $qb = $this->getDm()->getRepository('AcmeBasicCmsBundle:Post')->createQueryBuilder('p');
+        $qb->orderBy()->desc()->field('p.date');
+        $posts = $qb->getQuery()->execute();
+
+        return array(
+            'posts' => $posts,
         );
     }
 }

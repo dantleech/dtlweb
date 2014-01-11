@@ -97,6 +97,7 @@ cmf_routing:
         controllers_by_class:
             Acme\BasicCmsBundle\Document\PostIndex: Acme\BasicCmsBundle\Controller\DefaultController::postIndexAction
             Acme\BasicCmsBundle\Document\Page: Acme\BasicCmsBundle\Controller\DefaultController::pageAction
+            Acme\BasicCmsBundle\Document\Post: Acme\BasicCmsBundle\Controller\DefaultController::postAction
 
 sonata_block:
     default_contexts: [cms]

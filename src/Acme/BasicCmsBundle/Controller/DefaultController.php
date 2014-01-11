@@ -151,4 +151,16 @@ class DefaultController extends Controller
             'pager' => $pager,
         );
     }
+
+    /**
+     * @Template()
+     */
+    public function postAction(Request $request)
+    {
+        $contentDocument = $request->get('contentDocument');
+
+        return array(
+            'post' => $contentDocument,
+        );
+    }
 }

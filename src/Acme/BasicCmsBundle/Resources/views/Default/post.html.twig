@@ -1,0 +1,21 @@
+{% extends "AcmeBasicCmsBundle::layout.html.twig" %}
+{% block title %}
+    <h1>{{ post.title }}</h1>
+{% endblock %}
+{% block content %}
+<div class="cell">
+    <div class="col width-2of4">
+        &lt;&lt;&nbsp;{% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_prev(post)} %}
+    </div>
+    <div class="col width-2of4" style="text-align: right">
+        {% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_next(post)} %}&nbsp;&gt;&gt;
+    </div>
+</div>
+    <div class="cell">
+        {{ post.content|raw }}
+    </div>
+<div class="cell" style="text-align: right">
+    <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
+</div>
+{% endblock %}
+

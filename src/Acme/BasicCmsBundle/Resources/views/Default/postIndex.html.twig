@@ -19,7 +19,7 @@
     {% for post in pager %}
         <div class="cell panel">
             <div class="header">
-                {{ post.title }}
+                <a href="{{ path(post) }}">{{ post.title }}</a>
             </div>
             <div class="body">
                 <div class="cell">

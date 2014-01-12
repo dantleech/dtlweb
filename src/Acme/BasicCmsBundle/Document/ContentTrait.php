@@ -2,6 +2,8 @@
 
 namespace Acme\BasicCmsBundle\Document;
 
+use Ferrandini\Urlizer;
+
 trait ContentTrait
 {
     /**
@@ -15,9 +17,14 @@ trait ContentTrait
     protected $parent;
 
     /**
-     * @PHPCR\NodeName()
+     * @PHPCR\String()
      */
     protected $title;
+
+    /**
+     * @PHPCR\NodeName()
+     */
+    protected $name;
 
     /**
      * @PHPCR\String(nullable=true)
@@ -55,6 +62,7 @@ trait ContentTrait
     public function setTitle($title)
     {
         $this->title = $title;
+        $this->name = Urlizer::urlize($title);
     }
 
     public function getContent()

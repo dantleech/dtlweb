@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
+use Acme\BasicCmsBundle\Document\Comment;
 
 class DefaultController extends Controller
 {
@@ -167,8 +168,24 @@ class DefaultController extends Controller
     {
         $contentDocument = $request->get('contentDocument');
 
+        $comment = new Comment();
+        $comment->setParent($contentDocument);
+        $commentForm = $this->createForm('form', $comment);
+        $commentForm->add('title');
+        $commentForm->add('email');
+        $commentForm->add('author');
+        $commentForm->add('comment', 'textarea');
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isValid())
+        {
+            $this->getDm()->persist($comment);
+            $this->getDm()->flush();
+        }
+
         return array(
             'post' => $contentDocument,
+            'comment_form' => $commentForm->createView(),
         );
     }
 

@@ -6,6 +6,7 @@ use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use DTL\PhpcrTaxonomyBundle\Metadata\Annotations as PhpcrTaxonomy;
 use Doctrine\Common\Collections\ArrayCollection;
+use Acme\BasicCmsBundle\Document\Comment;
 
 /**
  * @PHPCR\Document(referenceable=true)
@@ -32,6 +33,7 @@ class Post implements RouteReferrersReadInterface
     public function __construct()
     {
         $this->tagObjects = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -73,6 +75,11 @@ class Post implements RouteReferrersReadInterface
     {
         $this->tagObjects = $tagObjects;
     }
+
+    public function getComments()
+    {
+        return $this->children->filter(function ($obj) {
+            return $obj instanceof Comment;
+        });
+    }
 }
-
-

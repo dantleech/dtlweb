@@ -39,6 +39,11 @@ trait ContentTrait
      */
     protected $routes;
 
+    /**
+     * @PHPCR\Children()
+     */
+    protected $children;
+
     public function getId()
     {
         return $this->id;
@@ -47,6 +52,11 @@ trait ContentTrait
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
     }
 
     public function setParent($parent)

@@ -7,6 +7,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Acme\BasicCmsBundle\Document\Post;
 use Symfony\Component\Console\Output\OutputInterface;
+use Acme\BasicCmsBundle\Document\Comment;
 
 class MigrateCommand extends ContainerAwareCommand
 {
@@ -43,8 +44,24 @@ class MigrateCommand extends ContainerAwareCommand
                 $output->writeln('  ' . $row2['name']);
                 $tags[] = $row2['name'];
             }
-
             $post->setTags($tags);
+
+            $stmt2 = $conn->executeQuery(
+                'SELECT * FROM comment WHERE blog_id = ' . $row['id']
+            );
+
+            while ($row2 = $stmt2->fetch(\PDO::FETCH_ASSOC)) {
+                $output->writeln('  ' . $row2['name']);
+                $comment = new Comment();
+                $comment->setTitle($row2['title']);
+                $comment->setAuthor($row2['name']);
+                $comment->setEmail($row2['email']);
+                $comment->setComment($row2['comment']);
+                $comment->setCreatedAt(new \DateTime($row2['created_at']));
+                $comment->setParent($post);
+                $dm->persist($comment);
+            }
+
             $dm->persist($post);
         }
 

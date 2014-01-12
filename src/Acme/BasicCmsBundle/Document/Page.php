@@ -13,19 +13,14 @@ class Page implements RouteReferrersReadInterface, NodeInterface
 {
     use ContentTrait;
 
-    /**
-     * @PHPCR\Children()
-     */
-    protected $children;
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
 
     public function getName()
     {
         return $this->title;
-    }
-
-    public function getChildren()
-    {
-        return $this->children;
     }
 
     public function getOptions()

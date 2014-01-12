@@ -3,19 +3,44 @@
     <h1>{{ post.title }}</h1>
 {% endblock %}
 {% block content %}
-<div class="cell">
-    <div class="col width-2of4">
-        &lt;&lt;&nbsp;{% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_prev(post)} %}
+    <div class="cell">
+        <div class="col width-2of4">
+            &lt;&lt;&nbsp;{% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_prev(post)} %}
+        </div>
+        <div class="col width-2of4" style="text-align: right">
+            {% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_next(post)} %}&nbsp;&gt;&gt;
+        </div>
     </div>
-    <div class="col width-2of4" style="text-align: right">
-        {% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_next(post)} %}&nbsp;&gt;&gt;
-    </div>
-</div>
     <div class="cell">
         {{ post.content|raw }}
     </div>
-<div class="cell" style="text-align: right">
-    <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
-</div>
+    <div class="cell" style="text-align: right">
+        <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
+    </div>
+    <h2>Comments</h2>
+    {% for comment in post.comments %}
+    <div class="cell panel">
+        <div class="header">
+            {{ comment.title }} by {{ comment.author|default('Anon.') }} on the {{ comment.createdAt.format('jS F Y, g:i a') }}
+        </div>
+        <div class="body">
+            <div class="cell">
+                {{ comment.comment }}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="cell">
+        <p>No comments yet!</p>
+    </div>
+    {% endfor %}
+    <h3>Leave a comment</h3>
+    <div class="cell form">
+        <form action="" method="POST">
+            {{ form_widget(comment_form) }}
+            {{ form_rest(comment_form) }}
+            <input type="submit"/>
+        </form>
+    </div>
 {% endblock %}
 

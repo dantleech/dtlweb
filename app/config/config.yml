@@ -1,4 +1,3 @@
-
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
@@ -31,6 +30,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources: 
+            - AcmeBasicCmsBundle::form.html.twig
+
 
 # Assetic Configuration
 assetic:
@@ -120,3 +123,7 @@ sonata_block:
 
 knp_menu:
     twig: true
+
+sonata_admin:
+    templates:
+        layout: AcmeBasicCmsBundle::admin_layout.html.twig

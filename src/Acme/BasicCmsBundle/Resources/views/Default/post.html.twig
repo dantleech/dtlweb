@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="cell">
-        {{ post.content|raw }}
+        {{ post.content|markdown|raw }}
     </div>
     <div class="cell" style="text-align: right">
         <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
@@ -25,7 +25,7 @@
         </div>
         <div class="body">
             <div class="cell">
-                {{ comment.comment }}
+                {{ comment.comment|markdown }}
             </div>
         </div>
     </div>
@@ -35,11 +35,13 @@
     </div>
     {% endfor %}
     <h3>Leave a comment</h3>
-    <div class="cell form">
+    <div class="cell">
         <form action="" method="POST">
-            {{ form_widget(comment_form) }}
-            {{ form_rest(comment_form) }}
-            <input type="submit"/>
+            <div class="col">
+                {{ form_widget(comment_form) }}
+                {{ form_rest(comment_form) }}
+                <input type="submit"/>
+            </div>
         </form>
     </div>
 {% endblock %}

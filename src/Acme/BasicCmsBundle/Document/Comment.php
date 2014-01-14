@@ -4,6 +4,7 @@ namespace Acme\BasicCmsBundle\Document;
 
 use Ferrandini\Urlizer;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @PHPCR\Document(referenceable=true)
@@ -37,6 +38,7 @@ class Comment
 
     /**
      * @PHPCR\String(nullable=true)
+     * @Assert\Email()
      */
     protected $email;
 

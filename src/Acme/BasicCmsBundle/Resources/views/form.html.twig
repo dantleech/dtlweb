@@ -1,0 +1,17 @@
+{% block form_row %}
+{% spaceless %}
+<div class="col">
+    <div class="col width-1of4">
+        <div class="cell">
+            {{ form_label(form) }}
+        </div>
+    </div>
+    <div class="col width-fill">
+        <div class="cell">
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+        </div>
+    </div>
+</div>
+{% endspaceless %}
+{% endblock form_row %}

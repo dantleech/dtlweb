@@ -1,0 +1,25 @@
+.controls textarea.content_textarea {
+    background-color: #111;
+    color: #eee;
+    width: 800px;
+    height: 400px;
+    font-family: monospace;
+}
+
+p, img {
+    clear: both;
+}
+
+code {
+    border-style: none;
+    margin: 0px;
+}
+
+pre {
+    background-color: #111;
+    background-image: none;
+    border-radius: 0px;
+    color: #eee;
+    margin: 0px;
+    padding: 5px;
+}

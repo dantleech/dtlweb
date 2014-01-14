@@ -23,7 +23,13 @@ class PageAdmin extends Admin
         $formMapper
             ->with('form.group_general')
             ->add('title', 'text')
-            ->add('content', 'textarea')
+            ->add('content', 'textarea', array(
+                'attr' => array(
+                    'cols' => 80,
+                    'rows' => 40,
+                    'class' => 'content_textarea',
+                )
+            ))
         ->end();
     }
 

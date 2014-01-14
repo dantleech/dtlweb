@@ -30,6 +30,8 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new DTL\PhpcrTaxonomyBundle\DTLPhpcrTaxonomyBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

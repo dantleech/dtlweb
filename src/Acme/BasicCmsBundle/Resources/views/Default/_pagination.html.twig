@@ -1,0 +1,11 @@
+        <div class="cell pagination">
+            {{ pagerfanta(pager, 'default', {
+                'container_template' : '<ul class="nav">%pages%</ul>',
+                'span_template'      : '<li class="%class%">%text%</li>',
+                'page_template'      : '<li><a href="%href%">%text%</a></li>',
+                'css_disabled_class' : 'disabled',
+                'css_dots_class'     : 'dots',
+                'css_current_class'  : 'active',
+            }) }}
+        </div>
+

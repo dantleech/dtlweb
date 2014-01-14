@@ -4,7 +4,7 @@
     <div class="cell">
         <ul>
         {% for referrer in referrers %}
-                <li><a href="{{ path(referrer) }}">{{ referrer.title }}</a></li>
+            {% include "AcmeBasicCmsBundle:Default:_mediumPost.html.twig" with {'post': referrer} %}
         {% endfor %}
         </ul>
     </div>

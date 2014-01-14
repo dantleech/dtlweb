@@ -1,6 +1,7 @@
 {% extends "AcmeBasicCmsBundle::layout.html.twig" %}
 {% block title %}
     <h1>{{ post.title }}</h1>
+    <p>{% include "AcmeBasicCmsBundle:Default:_tags.html.twig" with {'tags': post.tags} %}</p>
 {% endblock %}
 {% block content %}
     <div class="cell">
@@ -12,37 +13,39 @@
         </div>
     </div>
     <div class="cell">
-        {{ post.content|markdown|raw }}
-    </div>
-    <div class="cell" style="text-align: right">
-        <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
-    </div>
-    <h2>Comments</h2>
-    {% for comment in post.comments %}
-    <div class="cell panel">
-        <div class="header">
-            {{ comment.title }} by {{ comment.author|default('Anon.') }} on the {{ comment.createdAt.format('jS F Y, g:i a') }}
+        <section class="article">
+            {{ post.content|markdown|raw }}
+        </section>
+        <div class="cell" style="text-align: right">
+            <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
         </div>
-        <div class="body">
-            <div class="cell">
-                {{ comment.comment|markdown }}
+        <h2>Comments</h2>
+        {% for comment in post.comments %}
+        <div class="cell panel">
+            <div class="header">
+                {{ comment.title }} by {{ comment.author|default('Anon.') }} on the {{ comment.createdAt.format('jS F Y, g:i a') }}
+            </div>
+            <div class="body">
+                <div class="cell">
+                    {{ comment.comment|markdown|raw }}
+                </div>
             </div>
         </div>
-    </div>
-    {% else %}
-    <div class="cell">
-        <p>No comments yet!</p>
-    </div>
-    {% endfor %}
-    <h3>Leave a comment</h3>
-    <div class="cell">
-        <form action="" method="POST">
-            <div class="col">
-                {{ form_widget(comment_form) }}
-                {{ form_rest(comment_form) }}
-                <input type="submit"/>
-            </div>
-        </form>
+        {% else %}
+        <div class="cell">
+            <p>No comments yet!</p>
+        </div>
+        {% endfor %}
+        <h3>Leave a comment</h3>
+        <div class="cell">
+            <form action="" method="POST">
+                <div class="col">
+                    {{ form_widget(comment_form) }}
+                    {{ form_rest(comment_form) }}
+                    <input type="submit"/>
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
 

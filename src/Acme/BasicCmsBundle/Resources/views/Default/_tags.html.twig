@@ -1,0 +1,4 @@
+{% for tag in tags %}
+<a href="{{ path('tag_referrer_index', {'tag': tag}) }}">{{ tag }}</a>
+    {% if not loop.last %},{% endif %}
+{% endfor %}

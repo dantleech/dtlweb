@@ -5,6 +5,7 @@ namespace Acme\BasicCmsBundle\Document;
 use Doctrine\ODM\PHPCR\Mapping\Annotations as PHPCR;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use Knp\Menu\NodeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @PHPCR\Document(referenceable=true)

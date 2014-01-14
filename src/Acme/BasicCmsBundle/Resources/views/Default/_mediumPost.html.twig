@@ -1,0 +1,19 @@
+<div class="cell panel">
+    <div class="cell">
+        <div class="col width-2of4">
+            <h3><a href="{{ path(post) }}">{{ post.title }}</a></h3>
+        </div>
+        <div class="col width-2of4" style="text-align: right;">
+            <i>{{ post.date.format('Y-m-d') }}</i>
+        </div>
+    </div>
+    <div class="body">
+        <div class="cell">
+            {{ post.content|truncate(255) }}
+        </div>
+    </div>
+    <div class="footer gradient">
+        {% include "AcmeBasicCmsBundle:Default:_tags.html.twig" with {'tags': post.tags } %}
+    </div>
+</div>
+

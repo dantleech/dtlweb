@@ -121,6 +121,12 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts: [admin]
 
+knp_markdown:
+    sundown:
+        extensions:
+            fenced_code_blocks: true
+
+
 knp_menu:
     twig: true
 

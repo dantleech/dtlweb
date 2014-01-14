@@ -1,12 +1,3 @@
 {% for post in posts %}
-    <div class="cell panel">
-        <div class="header">
-            <a href="{{ path(post) }}">{{ post.title }}</a>
-        </div>
-        <div class="body">
-            <div class="cell">
-                {{ post.content|truncate(50) }}
-            </div>
-        </div>
-    </div>
+    {% include "AcmeBasicCmsBundle:Default:_smallPost.html.twig" %}
 {% endfor %}

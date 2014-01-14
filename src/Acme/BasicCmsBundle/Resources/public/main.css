@@ -10,16 +10,29 @@ p, img {
     clear: both;
 }
 
+.pagination li.active {
+    padding: 0.3em;
+}
+
 code {
     border-style: none;
     margin: 0px;
 }
 
-pre {
+section.article pre {
     background-color: #111;
-    background-image: none;
     border-radius: 0px;
     color: #eee;
-    margin: 0px;
-    padding: 5px;
+    padding: 0px 20px;
+    overflow-x: auto;
+    white-space: pre;
+    overflow: auto;
+    user-select: all;
+}
+
+section.article pre code {
+}
+
+section.article {
+    font-size: 1.2em;
 }

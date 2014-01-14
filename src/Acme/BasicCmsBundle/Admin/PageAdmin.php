@@ -11,6 +11,15 @@ use Sonata\AdminBundle\Admin\AdminInterface;
 
 class PageAdmin extends Admin
 {
+    public function configure()
+    {
+        $this->setSubClasses(array(
+            'Page' => 'Acme\BasicCmsBundle\Document\Page',
+            'Contact Page' => 'Acme\BasicCmsBundle\Document\ContactPage',
+            'Post Index' => 'Acme\BasicCmsBundle\Document\PostIndex',
+        ));
+    }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -35,7 +44,7 @@ class PageAdmin extends Admin
 
     public function prePersist($document)
     {
-        $parent = $this->getModelManager()->find(null, '/cms/pages');
+        $parent = $this->getModelManager()->find(null, '/cms/pages/main');
         $document->setParent($parent);
     }
 

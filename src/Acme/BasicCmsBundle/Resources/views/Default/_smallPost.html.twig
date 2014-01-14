@@ -1,0 +1,21 @@
+<div class="cell panel">
+        <div class="col width-1of4">
+            <div class="cell">
+                <div class="button gradient">
+                {{ post.date.format('nS') }}
+                {{ post.date.format('M') }}
+                </div>
+            </div>
+        </div>
+        <div class="col width-fill">
+            <div class="cell">
+                <h4><a href="{{ path(post) }}">{{ post.title }}</a></h4>
+            {{ post.content|truncate(25) }}
+            </div>
+        </div>
+    <div class="footer gradient">
+        {% include "AcmeBasicCmsBundle:Default:_tags.html.twig" with {'tags': post.tags } %}
+    </div>
+</div>
+
+

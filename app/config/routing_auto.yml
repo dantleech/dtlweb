@@ -11,6 +11,17 @@ cmf_routing_auto:
                 exists_action: auto_increment
                 not_exists_action: create
 
+        Acme\BasicCmsBundle\Document\ContactPage:
+            content_path:
+                pages:
+                    provider: [specified, { path: /cms/routes/page }]
+                    exists_action: use
+                    not_exists_action: create
+            content_name:
+                provider: [content_method, { method: getTitle }]
+                exists_action: auto_increment
+                not_exists_action: create
+
         Acme\BasicCmsBundle\Document\PostIndex:
             content_path:
                 pages:

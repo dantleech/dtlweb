@@ -149,7 +149,7 @@ class DefaultController extends Controller
         $page = $request->get('page', 1);
         $qb = $this->getDm()->getRepository('Acme\BasicCmsBundle\Document\Post')
             ->createQueryBuilder('p');
-        $qb->orderBy()->asc()->localName('p');
+        $qb->orderBy()->desc()->field('p.date');
 
         $adapter = new DoctrineODMPhpcrAdapter($qb);
         $pager = new Pagerfanta($adapter);
@@ -196,6 +196,7 @@ class DefaultController extends Controller
     {
         $qb = $this->getDm()->getRepository('AcmeBasicCmsBundle:Post')->createQueryBuilder('p');
         $qb->orderBy()->desc()->field('p.date');
+        $qb->setMaxResults(10);
         $posts = $qb->getQuery()->execute();
 
         return array(

@@ -1,32 +1,10 @@
 {% extends "AcmeBasicCmsBundle::layout.html.twig" %}
 {% block title %}<h1>{{ page.title }}</h1>{% endblock %}
 {% block content %}
-    <div class="cell">
-    {{ page.content|raw }}
-    </div>
-    <div class="cell panel">
-        <div class="cell pagination">
-            {{ pagerfanta(pager, 'default', {
-                'container_template' : '<ul class="nav">%pages%</ul>',
-                'span_template'      : '<li class="%class%">%text%</li>',
-                'page_template'      : '<li><a href="%href%">%text%</a></li>',
-                'css_disabled_class' : 'disabled',
-                'css_dots_class'     : 'dots',
-                'css_current_class'  : 'active',
-            }) }}
-        </div>
-    </div>
+    {% include "AcmeBasicCmsBundle:Default:_pagination.html.twig" %}
     {% for post in pager %}
-        <div class="cell panel">
-            <div class="header">
-                <a href="{{ path(post) }}">{{ post.title }}</a>
-            </div>
-            <div class="body">
-                <div class="cell">
-                    {{ post.content|truncate(50) }}
-                </div>
-            </div>
-        </div>
+        {% include "AcmeBasicCmsBundle:Default:_mediumPost.html.twig" %}
     {% endfor %}
+    {% include "AcmeBasicCmsBundle:Default:_pagination.html.twig" %}
 {% endblock %}
 

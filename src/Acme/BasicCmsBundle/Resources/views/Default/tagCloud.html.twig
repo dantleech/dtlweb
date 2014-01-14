@@ -1,5 +1,5 @@
 <ul class="nav cloud">
     {% for tagName, data in tags %}
-    <li style="font-size: {{ data.weight * 3 }}em"><a href="{{ path('tag_referrer_index', {'tag': tagName}) }}">{{ tagName }}</a></li>
+        <li style="font-size: {{ data.weight * 0.8 + 0.7 }}em"><a href="{{ path('tag_referrer_index', {'tag': tagName}) }}">{{ tagName }}</a></li>
     {% endfor %}
 </ul>

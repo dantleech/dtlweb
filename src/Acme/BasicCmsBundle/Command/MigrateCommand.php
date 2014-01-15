@@ -33,6 +33,7 @@ class MigrateCommand extends ContainerAwareCommand
             $post->setTitle($row['title']);
             $post->setContent(utf8_encode($row['body']));
             $post->setDate(new \DateTime($row['published_on']));
+            $post->setPublished((boolean) $row['is_published']);
             $post->setParent($parent);
 
             $stmt2 = $conn->executeQuery(

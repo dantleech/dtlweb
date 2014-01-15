@@ -17,6 +17,7 @@ class PageAdmin extends Admin
             'Page' => 'Acme\BasicCmsBundle\Document\Page',
             'Contact Page' => 'Acme\BasicCmsBundle\Document\ContactPage',
             'Post Index' => 'Acme\BasicCmsBundle\Document\PostIndex',
+            'Latest Blog Post' => 'Acme\BasicCmsBundle\Document\LatestBlogPost',
         ));
     }
 
@@ -32,6 +33,7 @@ class PageAdmin extends Admin
         $formMapper
             ->with('form.group_general')
             ->add('title', 'text')
+            ->add('published', 'checkbox')
             ->add('content', 'textarea', array(
                 'attr' => array(
                     'cols' => 80,

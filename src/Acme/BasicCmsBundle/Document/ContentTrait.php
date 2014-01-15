@@ -44,6 +44,11 @@ trait ContentTrait
      */
     protected $children;
 
+    /**
+     * @PHPCR\Boolean()
+     */
+    protected $published = false;
+
     public function getId()
     {
         return $this->id;
@@ -88,5 +93,20 @@ trait ContentTrait
     public function getRoutes()
     {
         return $this->routes;
+    }
+
+    public function getPublished() 
+    {
+        return $this->published;
+    }
+    
+    public function setPublished($Published)
+    {
+        $this->published = $Published;
+    }
+
+    public function isPublished() 
+    {
+        return $this->published;
     }
 }

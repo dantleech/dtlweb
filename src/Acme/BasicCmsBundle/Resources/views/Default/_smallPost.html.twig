@@ -10,7 +10,7 @@
         <div class="col width-fill">
             <div class="cell">
                 <h4><a href="{{ path(post) }}">{{ post.title }}</a></h4>
-            {{ post.content|truncate(25) }}
+                {{ post.content|markdown|striptags|truncate(50) }}
             </div>
         </div>
     <div class="footer gradient">

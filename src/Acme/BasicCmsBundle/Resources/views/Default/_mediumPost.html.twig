@@ -9,7 +9,7 @@
     </div>
     <div class="body">
         <div class="cell">
-            {{ post.content|truncate(255) }}
+            {{ post.content|markdown|striptags|truncate(255) }}
         </div>
     </div>
     <div class="footer gradient">

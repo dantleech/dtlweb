@@ -110,6 +110,8 @@ cmf_routing:
                 route_basepath: /cms/routes
                 use_sonata_admin: false
         controllers_by_class:
+            Acme\BasicCmsBundle\Document\LatestBlogPost: Acme\BasicCmsBundle\Controller\DefaultController::latestPostAction
+            Acme\BasicCmsBundle\Document\ContactPage: Acme\BasicCmsBundle\Controller\DefaultController::contactAction
             Acme\BasicCmsBundle\Document\PostIndex: Acme\BasicCmsBundle\Controller\DefaultController::postIndexAction
             Acme\BasicCmsBundle\Document\Page: Acme\BasicCmsBundle\Controller\DefaultController::pageAction
             Acme\BasicCmsBundle\Document\Post: Acme\BasicCmsBundle\Controller\DefaultController::postAction

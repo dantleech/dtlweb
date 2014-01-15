@@ -6,19 +6,21 @@
 {% block content %}
     <div class="cell">
         <div class="col width-2of4">
-            &lt;&lt;&nbsp;{% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_prev(post)} %}
+            <span class="icon icon-32 icon-chevron-sign-left"></span>{% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_prev(post)} %}
         </div>
         <div class="col width-2of4" style="text-align: right">
-            {% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_next(post)} %}&nbsp;&gt;&gt;
+            {% include "AcmeBasicCmsBundle:Default:_postSibling.html.twig" with {'sibling': cmf_next(post)} %}<span class="icon icon-32 icon-chevron-sign-right">
         </div>
     </div>
     <div class="cell">
         <section class="article">
+            <div class="cell">
             {{ post.content|markdown|raw }}
+            </div>
+            <div class="cell" style="text-align: right">
+                <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
+            </div>
         </section>
-        <div class="cell" style="text-align: right">
-            <i>Posted on: {{ post.date.format('Y-m-d H:i:s') }}</i>
-        </div>
         <h2>Comments</h2>
         {% for comment in post.comments %}
         <div class="cell panel">

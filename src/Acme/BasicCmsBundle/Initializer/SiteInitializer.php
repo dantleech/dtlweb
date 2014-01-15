@@ -15,6 +15,7 @@ class SiteInitializer implements InitializerInterface
         NodeHelper::createPath($session, '/cms/posts');
         NodeHelper::createPath($session, '/cms/routes');
         NodeHelper::createPath($session, '/cms/tags');
+        NodeHelper::createPath($session, '/cms/messages');
         $session->save();
 
         // map a document to the 'cms' node

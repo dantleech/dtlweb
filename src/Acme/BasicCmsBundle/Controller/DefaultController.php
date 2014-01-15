@@ -9,6 +9,7 @@ use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\BasicCmsBundle\Document\Comment;
+use Acme\BasicCmsBundle\Document\Message;
 
 class DefaultController extends Controller
 {
@@ -22,6 +23,15 @@ class DefaultController extends Controller
         $site = $this->getDm()->find('Acme\BasicCmsBundle\Document\Site', '/cms');
 
         return $site;
+    }
+
+    protected function checkPublished($doc)
+    {
+        if (!$doc->isPublished()) {
+            throw $this->createNotFoundException(
+                'This document has not been published.'
+            );
+        }
     }
 
     /**
@@ -45,6 +55,8 @@ class DefaultController extends Controller
      */
     public function pageAction($contentDocument, $isHomepage = false)
     {
+        $this->checkPublished($contentDocument);
+
         $dm = $this->get('doctrine_phpcr')->getManager();
         $posts = $dm->getRepository('Acme\BasicCmsBundle\Document\Post')->findAll();
         $isHomepage = $this->getSite()->getHomepage() === $contentDocument;
@@ -78,6 +90,16 @@ class DefaultController extends Controller
         foreach ($tags as $tag => $data) {
             $tags[$tag]['weight'] = round($data['referrer_count'] / $max, 2);
         }
+
+        $keys = array_keys($tags);
+        $new = array();
+        shuffle($keys);
+
+        foreach($keys as $key) {
+            $new[$key] = $tags[$key];
+        }
+
+        $tags = $new;
 
         return $this->render('AcmeBasicCmsBundle:Default:tagCloud.html.twig', array(
             'tags' => $tags,
@@ -150,6 +172,7 @@ class DefaultController extends Controller
         $qb = $this->getDm()->getRepository('Acme\BasicCmsBundle\Document\Post')
             ->createQueryBuilder('p');
         $qb->orderBy()->desc()->field('p.date');
+        $qb->where()->eq()->field('p.published')->literal(true);
 
         $adapter = new DoctrineODMPhpcrAdapter($qb);
         $pager = new Pagerfanta($adapter);
@@ -167,6 +190,7 @@ class DefaultController extends Controller
     public function postAction(Request $request)
     {
         $contentDocument = $request->get('contentDocument');
+        $this->checkPublished($contentDocument);
 
         $comment = new Comment();
         $comment->setParent($contentDocument);
@@ -196,11 +220,78 @@ class DefaultController extends Controller
     {
         $qb = $this->getDm()->getRepository('AcmeBasicCmsBundle:Post')->createQueryBuilder('p');
         $qb->orderBy()->desc()->field('p.date');
+        $qb->where()->eq()->field('p.published')->literal(true);
         $qb->setMaxResults(10);
         $posts = $qb->getQuery()->execute();
 
         return array(
             'posts' => $posts,
         );
+    }
+
+    /**
+     * @Template()
+     */
+    public function contactAction(Request $request)
+    {
+        $contentDocument = $request->get('contentDocument');
+
+        $message = new Message();
+        $form = $this->createFormBuilder($message)
+            ->add('name')
+            ->add('email')
+            ->add('message', 'textarea', array(
+                'attr' => array('cols' => 60, 'rows' => 20)
+            ))
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $parent = $this->getDm()->find(null, '/cms/messages');
+            $message->setParent($parent);
+            $this->getDm()->persist($message);
+            $this->getDm()->flush();
+
+            $contactEmail = $this->container->getParameter('contact_email');
+            $mailer = $this->get('mailer');
+            $mail = $mailer->createMessage();
+            $mail->setTo($contactEmail);
+            $mail->setFrom($message->getEmail(), $message->getName());
+            $mail->setSubject(sprintf('[DTLWEB] Message from %s', $message->getName()));
+            $mail->setBody($message->getMessage());
+            $mailer->send($mail);
+
+            return $this->redirect($this->generateUrl('contact_success'));
+        }
+
+        return array(
+            'page' => $contentDocument,
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * @Template()
+     */
+    public function latestPostAction()
+    {
+        $qb = $this->getDm()->createQueryBuilder();
+        $qb->from()->document('Acme\BasicCmsBundle\Document\Post', 'p')->end()
+            ->orderBy()->desc()->field('p.date')->end()->end()
+            ->setMaxResults(1)
+        ;
+        $post = $qb->getQuery()->getOneOrNullResult();
+
+        return $this->redirect($this->generateUrl($post));;
+    }
+
+    /**
+     * @Route(name="contact_success", pattern="/contact_success")
+     * @Template()
+     */
+    public function contactSuccessAction()
+    {
+        return array();
     }
 }

@@ -60,6 +60,13 @@ class Post implements RouteReferrersReadInterface
     {
         return $this->tags;
     }
+
+    public function getRandomTags()
+    {
+        $tags = $this->tags->toArray();
+        $tags = array_rand($tags);
+        return $tags;
+    }
     
     public function setTags($tags)
     {

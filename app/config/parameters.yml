@@ -1,0 +1,22 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: dtlweb
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: vxA234n234jsdft
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+    phpcr_workspace: default
+    phpcr_user: admin
+    phpcr_pass: admin
+    site_password: dan3bleach
+    contact_email: daniel@dantleech.com

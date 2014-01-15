@@ -198,6 +198,7 @@ class DefaultController extends Controller
         $commentForm->add('title');
         $commentForm->add('email');
         $commentForm->add('author');
+        $commentForm->add('i_am_not_spam');
         $commentForm->add('comment', 'textarea');
         $commentForm->handleRequest($request);
 
@@ -279,6 +280,7 @@ class DefaultController extends Controller
         $qb = $this->getDm()->createQueryBuilder();
         $qb->from()->document('Acme\BasicCmsBundle\Document\Post', 'p')->end()
             ->orderBy()->desc()->field('p.date')->end()->end()
+            ->where()->eq()->field('p.published')->literal(true)->end()->end()
             ->setMaxResults(1)
         ;
         $post = $qb->getQuery()->getOneOrNullResult();

@@ -55,7 +55,7 @@ class MigrateCommand extends ContainerAwareCommand
                 $output->writeln('  ' . $row2['name']);
                 $comment = new Comment();
                 $comment->setTitle($row2['title']);
-                $comment->setAuthor($row2['name']);
+                $comment->setAuthor(utf8_encode($row2['name']));
                 $comment->setEmail($row2['email']);
                 $comment->setComment($row2['comment']);
                 $comment->setCreatedAt(new \DateTime($row2['created_at']));

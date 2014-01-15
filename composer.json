@@ -34,7 +34,6 @@
         "white-october/pagerfanta-bundle": "dev-master",
 
         "knplabs/knp-markdown-bundle": "1.2.*@dev"
-        "vmg/sundown": gT
     },
     "scripts": {
         "post-install-cmd": [

@@ -38,11 +38,26 @@
             <p>No comments yet!</p>
         </div>
         {% endfor %}
-        <h3>Leave a comment</h3>
+        <h3 id="comment">Leave a comment</h3>
         <div class="cell">
-            <form action="" method="POST">
+            <form action="#comment" method="POST">
                 <div class="col">
-                    {{ form_widget(comment_form) }}
+                    {{ form_row(comment_form.title) }}
+                    {{ form_row(comment_form.email) }}
+                    {{ form_row(comment_form.author) }}
+                    <div clsas="cell">
+                    <div class="col width-1of4">
+                        <div class="cell">
+                            <label>Type "I AM NOT SPAM"</label>
+                        </div>
+                    </div>
+                    <div class="col width-fill">
+                        <div class="cell">
+                            {{ form_errors(comment_form.i_am_not_spam) }}
+                            {{ form_widget(comment_form.i_am_not_spam) }}
+                        </div>
+                    </div>
+                    </div>
                     {{ form_rest(comment_form) }}
                     <input type="submit"/>
                 </div>

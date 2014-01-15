@@ -52,6 +52,11 @@ class Comment
      */
     protected $createdAt;
 
+    /**
+     * @Assert\EqualTo(value="I AM NOT SPAM")
+     */
+    protected $iAmNotSpam;
+
     public function __construct()
     {
         $this->name = uniqid();
@@ -122,6 +127,16 @@ class Comment
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    public function getIAmNotSpam() 
+    {
+        return $this->iAmNotSpam;
+    }
+    
+    public function setIAmNotSpam($iAmNotSpam)
+    {
+        $this->iAmNotSpam = $iAmNotSpam;
     }
     
 }

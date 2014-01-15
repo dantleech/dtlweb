@@ -20,4 +20,7 @@ parameters:
     phpcr_workspace: default
     phpcr_user: admin
     phpcr_pass: admin
+
+    site_password: password
+
     contact_email: foobar@example.com

@@ -47,6 +47,11 @@ class Comment
      */
     protected $createdAt;
 
+    /**
+     * @PHPCR\Boolean()
+     */
+    protected $notify = false;
+
     protected $expression;
 
     protected $expressionVars = array();
@@ -154,5 +159,16 @@ class Comment
     {
         $this->expressionAnswer = $expressionAnswer;
     }
+
+    public function getNotify() 
+    {
+        return $this->notify;
+    }
+    
+    public function setNotify($notify)
+    {
+        $this->notify = $notify;
+    }
+    
     
 }

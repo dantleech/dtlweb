@@ -90,6 +90,13 @@
             <tag name="cmf_request_aware"/>
         </service>
 
+        <service
+            id="acme.basic_cms.comment_manager"
+            class="Acme\BasicCmsBundle\Model\CommentManager">
+            <argument type="service" id="mailer" />
+            <argument type="service" id="twig" />
+        </service>
+
     </services>
 
 </container>

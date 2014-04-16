@@ -19,6 +19,11 @@ class Site
      */
     protected $homepage;
 
+    /**
+     * @PHPCR\String()
+     */
+    protected $contactEmail;
+
     public function getHomepage()
     {
         return $this->homepage;
@@ -28,4 +33,15 @@ class Site
     {
         $this->homepage = $homepage;
     }
+
+    public function getContactEmail() 
+    {
+        return $this->contactEmail;
+    }
+    
+    public function setContactEmail($contactEmail)
+    {
+        $this->contactEmail = $contactEmail;
+    }
+    
 }

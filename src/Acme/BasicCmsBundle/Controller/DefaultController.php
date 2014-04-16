@@ -191,6 +191,7 @@ class DefaultController extends Controller
         $contentDocument = $request->get('contentDocument');
         $this->checkPublished($contentDocument);
 
+        $commentManager = $this->get('acme.basic_cms.comment_manager');
         $generator = $this->get('dtl.expression_captcha.generator');
         $expressionLanguage = $this->get('dtl.expression_captcha.expression_language');
         $expressionGen = $generator->generateExpression();
@@ -219,6 +220,10 @@ class DefaultController extends Controller
 
         $commentForm = $this->createForm('form', $comment);
         $commentForm->add('email');
+        $commentForm->add('notify', 'checkbox', array(
+            'label' => 'Notify me about new comments',
+            'required' => false,
+        ));
         $commentForm->add('author');
         $commentForm->add('comment', 'textarea');
         $commentForm->add('expressionAnswer', 'text', array(
@@ -238,6 +243,10 @@ class DefaultController extends Controller
         if ($commentForm->isValid()) {
             $this->getDm()->persist($comment);
             $this->getDm()->flush();
+
+            $commentManager->notifySiteOwer($this->getsite(), $comment);
+            $commentManager->notifySubscribers($this->getSite(), $comment);
+
             return $this->redirect($this->generateUrl($contentDocument));
         }
 

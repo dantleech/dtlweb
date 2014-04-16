@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
             new DTL\PhpcrTaxonomyBundle\DTLPhpcrTaxonomyBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new DTL\ExpressionCaptchaFormTypeBundle\DTLExpressionCaptchaFormTypeBundle(),
 
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );

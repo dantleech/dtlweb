@@ -10,6 +10,7 @@ use Pagerfanta\Pagerfanta;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\BasicCmsBundle\Document\Comment;
 use Acme\BasicCmsBundle\Document\Message;
+use Symfony\Component\Form\FormError;
 
 class DefaultController extends Controller
 {
@@ -190,25 +191,61 @@ class DefaultController extends Controller
         $contentDocument = $request->get('contentDocument');
         $this->checkPublished($contentDocument);
 
+        $generator = $this->get('dtl.expression_captcha.generator');
+        $expressionLanguage = $this->get('dtl.expression_captcha.expression_language');
+        $expressionGen = $generator->generateExpression();
+        $invalidCaptcha = null;
+
         $comment = new Comment();
+        $comment->setExpression($expressionGen->getExpression());
+        $comment->setExpressionVars($expressionGen->getVars());
         $comment->setParent($contentDocument);
+
+        if ($request->getMethod() == 'POST') {
+            $data = $request->request->get('form');
+            $expression = $data['expression'];
+            $expressionVars = $data['expressionVars'];
+
+            $answer = $expressionLanguage->evaluate(str_replace('$', '', $expression), $expressionVars);
+            $givenAnswer = $data['expressionAnswer'];
+
+            if ($answer != $givenAnswer) {
+                $invalidCaptcha = 'Wrong answer! ' . $expression . ' with ' . var_export($expressionVars, true) . ' is not ' . $givenAnswer;
+            }
+            $data['expressionVars'] = $expressionGen->getVars();
+            $data['expression'] = $expressionGen->getExpression();
+            $request->request->set('form', $data);
+        }
+
         $commentForm = $this->createForm('form', $comment);
-        $commentForm->add('title');
         $commentForm->add('email');
         $commentForm->add('author');
-        $commentForm->add('i_am_not_spam');
         $commentForm->add('comment', 'textarea');
+        $commentForm->add('expressionAnswer', 'text', array(
+            'required' => true,
+        ));
+        $commentForm->add('expression', 'hidden');
+        $commentForm->add('expressionVars', 'collection', array(
+            'type' => 'hidden',
+        ));
+       
         $commentForm->handleRequest($request);
 
-        if ($commentForm->isValid())
-        {
+        if ($invalidCaptcha) {
+            $commentForm->get('expressionAnswer')->addError(new FormError($invalidCaptcha));
+        }
+
+        if ($commentForm->isValid()) {
             $this->getDm()->persist($comment);
             $this->getDm()->flush();
+            return $this->redirect($this->generateUrl($contentDocument));
         }
+
 
         return array(
             'post' => $contentDocument,
             'comment_form' => $commentForm->createView(),
+            'expression' => $expressionGen,
         );
     }
 

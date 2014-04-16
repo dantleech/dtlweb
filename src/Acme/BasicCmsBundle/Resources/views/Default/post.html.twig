@@ -25,7 +25,7 @@
         {% for comment in post.comments %}
         <div class="cell panel">
             <div class="header">
-                {{ comment.title }} by {{ comment.author|default('Anon.') }} on the {{ comment.createdAt.format('jS F Y, g:i a') }}
+                {{ comment.author|default('Anon.') }} said the following on the {{ comment.createdAt.format('jS F Y at g:i a') }}:
             </div>
             <div class="body">
                 <div class="cell">
@@ -40,36 +40,35 @@
         {% endfor %}
         <h3 id="comment">Leave a comment</h3>
         <div class="cell">
-            <h4>Comments closed until I can upgrade my spam protection! Talk to me on twitter instead @dantleech</h4>
-            {#
                 <form action="#comment" method="POST">
                 <div class="col">
-                    {{ form_row(comment_form.title) }}
                     {{ form_row(comment_form.email) }}
                     {{ form_row(comment_form.author) }}
-                    <div clsas="cell">
-                        <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        Saisfy the following assertion in the following field:
-                        <pre>{% spaceless %}
-/**
- * @Assert\EqualTo(value="I AM NOT SPAM")
- */
-                        {% endspaceless %}</pre>
-                    </div>
-                    <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            {{ form_errors(comment_form.i_am_not_spam) }}
-                            {{ form_widget(comment_form.i_am_not_spam) }}
+                    <div class="col">
+                        <div class="col width-1of4"><div class="cell"><label>Prove yourself:</label></div></div>
+                        <div class="col width-fill">
+                            {{ form_errors(comment_form.expressionAnswer) }}
+                            <div class="cell">
+                                <input required="yes" type="text" placeholder="Answer the following" name="form[expressionAnswer]" /><br />
+                            <code>{{ expression.expression }}</code><br/>
+                            {% if expression.vars|length %}
+                                Where:
+                                <ul>
+                                {% for varName, varValue in expression.vars %}
+                                    <li><b>${{ varName }}</b> = <b>{{ varValue }}</b></li>
+                                {% endfor %}
+                                </ul><br/>
+                            {% endif %}
                         </div>
+                        </div>
+                        {{ form_widget(comment_form.expression) }}
+                        {{ form_widget(comment_form.expressionVars) }}
+                        {{ form_widget(comment_form._token) }}
                     </div>
-                    </div>
-                    {{ form_rest(comment_form) }}
+                    {{ form_row(comment_form.comment) }}
                     <input type="submit"/>
                 </div>
             </form>
-        #}
         </div>
     </div>
 {% endblock %}

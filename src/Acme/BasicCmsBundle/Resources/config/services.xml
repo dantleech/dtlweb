@@ -89,6 +89,7 @@
             <tag name="knp_menu.provider" />
             <tag name="cmf_request_aware"/>
         </service>
+
     </services>
 
 </container>

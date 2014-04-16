@@ -32,11 +32,6 @@ class Comment
     protected $author;
 
     /**
-     * @PHPCR\String()
-     */
-    protected $title;
-
-    /**
      * @PHPCR\String(nullable=true)
      * @Assert\Email()
      */
@@ -52,10 +47,11 @@ class Comment
      */
     protected $createdAt;
 
-    /**
-     * @Assert\EqualTo(value="I AM NOT SPAM")
-     */
-    protected $iAmNotSpam;
+    protected $expression;
+
+    protected $expressionVars = array();
+
+    protected $expressionAnswer;
 
     public function __construct()
     {
@@ -77,16 +73,6 @@ class Comment
     public function setParent($parent)
     {
         $this->parent = $parent;
-    }
-
-    public function getTitle() 
-    {
-        return $this->title;
-    }
-    
-    public function setTitle($title)
-    {
-        $this->title = $title;
     }
 
     public function getEmail() 
@@ -137,6 +123,36 @@ class Comment
     public function setIAmNotSpam($iAmNotSpam)
     {
         $this->iAmNotSpam = $iAmNotSpam;
+    }
+
+    public function getExpression() 
+    {
+        return $this->expression;
+    }
+    
+    public function setExpression($expression)
+    {
+        $this->expression = $expression;
+    }
+
+    public function getExpressionVars() 
+    {
+        return $this->expressionVars;
+    }
+    
+    public function setExpressionVars($expressionVars)
+    {
+        $this->expressionVars = $expressionVars;
+    }
+
+    public function getExpressionAnswer() 
+    {
+        return $this->expressionAnswer;
+    }
+    
+    public function setExpressionAnswer($expressionAnswer)
+    {
+        $this->expressionAnswer = $expressionAnswer;
     }
     
 }

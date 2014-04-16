@@ -45,7 +45,7 @@ trait ContentTrait
     protected $children;
 
     /**
-     * @PHPCR\Boolean()
+     * @PHPCR\Boolean(nullable=true)
      */
     protected $published = false;
 

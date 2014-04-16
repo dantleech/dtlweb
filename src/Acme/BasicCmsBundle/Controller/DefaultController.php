@@ -45,9 +45,7 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No homepage configured');
         }
 
-        return $this->forward('AcmeBasicCmsBundle:Default:page', array(
-            'contentDocument' => $homepage,
-        ));
+        return $this->redirect($this->generateUrl($homepage));
     }
 
     /**

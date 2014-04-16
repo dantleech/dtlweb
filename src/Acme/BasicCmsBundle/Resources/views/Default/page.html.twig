@@ -2,6 +2,6 @@
 {% block title %}<h1>{{ page.title }}{% endblock %}
 {% block content %}
     <div class="cell">
-        {{ page.content|raw }}
+        {{ page.content|markdown|raw }}
     </div>
 {% endblock %}

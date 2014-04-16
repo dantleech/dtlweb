@@ -40,17 +40,24 @@
         {% endfor %}
         <h3 id="comment">Leave a comment</h3>
         <div class="cell">
-            <form action="#comment" method="POST">
+            <h4>Comments closed until I can upgrade my spam protection! Talk to me on twitter instead @dantleech</h4>
+            {#
+                <form action="#comment" method="POST">
                 <div class="col">
                     {{ form_row(comment_form.title) }}
                     {{ form_row(comment_form.email) }}
                     {{ form_row(comment_form.author) }}
                     <div clsas="cell">
-                    <div class="col width-1of4">
-                        <div class="cell">
-                            <label>Type "I AM NOT SPAM"</label>
-                        </div>
+                        <div class="col width-1of4"></div>
+                    <div class="col width-fill">
+                        Saisfy the following assertion in the following field:
+                        <pre>{% spaceless %}
+/**
+ * @Assert\EqualTo(value="I AM NOT SPAM")
+ */
+                        {% endspaceless %}</pre>
                     </div>
+                    <div class="col width-1of4"></div>
                     <div class="col width-fill">
                         <div class="cell">
                             {{ form_errors(comment_form.i_am_not_spam) }}
@@ -62,6 +69,7 @@
                     <input type="submit"/>
                 </div>
             </form>
+        #}
         </div>
     </div>
 {% endblock %}

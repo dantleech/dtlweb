@@ -11,5 +11,10 @@
         <service id="dtl.expression_captcha.generator" class="DTL\ExpressionCaptchaFormTypeBundle\Generator\ExpressionGenerator">
             <argument type="service" id="dtl.expression_captcha.expression_language" />
         </service>
+
+        <service id="dtl.expression_captcha.form.type" class="DTL\ExpressionCaptchaFormTypeBundle\Form\Type\ExpressionCaptchaType">
+            <argument type="service" id="dtl.expression_captcha.generator" />
+            <tag name="form.type" alias="dtl_expression_captcha" />
+        </service>
     </services>
 </container>

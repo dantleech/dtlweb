@@ -52,12 +52,6 @@ class Comment
      */
     protected $notify = false;
 
-    protected $expression;
-
-    protected $expressionVars = array();
-
-    protected $expressionAnswer;
-
     public function __construct()
     {
         $this->name = uniqid();

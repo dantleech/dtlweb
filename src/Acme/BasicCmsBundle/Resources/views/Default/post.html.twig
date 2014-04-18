@@ -47,6 +47,7 @@
                     {{ form_row(comment_form.author) }}
                     <div class="col">
                         <div class="col width-1of4"><div class="cell"><label>Prove yourself:</label></div></div>
+                        {#
                         <div class="col width-fill">
                             {{ form_errors(comment_form.expressionAnswer) }}
                             <div class="cell">
@@ -62,6 +63,8 @@
                             {% endif %}
                         </div>
                         </div>
+                        #}
+                        {{ form_row(comment_form.captcha) }}
                         {{ form_widget(comment_form.expression) }}
                         {{ form_widget(comment_form.expressionVars) }}
                         {{ form_widget(comment_form._token) }}

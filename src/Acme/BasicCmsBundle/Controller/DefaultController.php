@@ -203,19 +203,6 @@ class DefaultController extends Controller
         $comment->setParent($contentDocument);
 
         if ($request->getMethod() == 'POST') {
-            $data = $request->request->get('form');
-            $expression = $data['expression'];
-            $expressionVars = $data['expressionVars'];
-
-            $answer = $expressionLanguage->evaluate(str_replace('$', '', $expression), $expressionVars);
-            $givenAnswer = $data['expressionAnswer'];
-
-            if ($answer != $givenAnswer) {
-                $invalidCaptcha = 'Wrong answer! ' . $expression . ' with ' . var_export($expressionVars, true) . ' is not ' . $givenAnswer;
-            }
-            $data['expressionVars'] = $expressionGen->getVars();
-            $data['expression'] = $expressionGen->getExpression();
-            $request->request->set('form', $data);
         }
 
         $commentForm = $this->createForm('form', $comment);
@@ -226,13 +213,7 @@ class DefaultController extends Controller
         ));
         $commentForm->add('author');
         $commentForm->add('comment', 'textarea');
-        $commentForm->add('expressionAnswer', 'text', array(
-            'required' => true,
-        ));
-        $commentForm->add('expression', 'hidden');
-        $commentForm->add('expressionVars', 'collection', array(
-            'type' => 'hidden',
-        ));
+        $commentForm->add('expressionAnswer', 'dtl_expression_captcha');
        
         $commentForm->handleRequest($request);
 

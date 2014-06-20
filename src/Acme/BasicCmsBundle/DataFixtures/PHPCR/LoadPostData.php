@@ -18,6 +18,7 @@ class LoadPostData implements FixtureInterface
         'Fith', 'Sixth', 'Seventh', 'Nth', 'Awesome', 'Shitty', 'Incredible', 'Interesting', 'Uninteresting') as $title) {
             $post = new Post();
             $post->setTitle(sprintf('My %s Post', $title));
+            $post->setPublished(true);
             $post->setParent($parent);
             $post->setContent(<<<HERE
 This is the content of my post.

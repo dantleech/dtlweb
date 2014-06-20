@@ -1,60 +1,14 @@
-cmf_routing_auto:
-    mappings:
-        Acme\BasicCmsBundle\Document\Page:
-            content_path:
-                pages:
-                    provider: [specified, { path: /cms/routes/page }]
-                    exists_action: use
-                    not_exists_action: create
-            content_name:
-                provider: [content_method, { method: getTitle }]
-                exists_action: auto_increment
-                not_exists_action: create
+Acme\BasicCmsBundle\Document\Page:
+    url_schema: /page/{title}
+    conflict_resolver: [auto_increment, {}]
+    defunct_route_handler: [ leave_redirect, {} ]
+    token_providers:
+        title: [content_method, { method: getTitle }]
 
-        Acme\BasicCmsBundle\Document\ContactPage:
-            content_path:
-                pages:
-                    provider: [specified, { path: /cms/routes/page }]
-                    exists_action: use
-                    not_exists_action: create
-            content_name:
-                provider: [content_method, { method: getTitle }]
-                exists_action: auto_increment
-                not_exists_action: create
-
-        Acme\BasicCmsBundle\Document\PostIndex:
-            content_path:
-                pages:
-                    provider: [specified, { path: /cms/routes/page }]
-                    exists_action: use
-                    not_exists_action: create
-            content_name:
-                provider: [content_method, { method: getTitle }]
-                exists_action: auto_increment
-                not_exists_action: create
-
-        Acme\BasicCmsBundle\Document\LatestBlogPost:
-            content_path:
-                pages:
-                    provider: [specified, { path: /cms/routes/page }]
-                    exists_action: use
-                    not_exists_action: create
-            content_name:
-                provider: [content_method, { method: getTitle }]
-                exists_action: auto_increment
-                not_exists_action: create
-
-        Acme\BasicCmsBundle\Document\Post:
-            content_path:
-                blog_path:
-                    provider: [specified, { path: /cms/routes/post }]
-                    exists_action: use
-                    not_exists_action: create
-                date:
-                    provider: [content_datetime, { method: getDate}]
-                    exists_action: use
-                    not_exists_action: create
-            content_name:
-                provider: [content_method, { method: getTitle }]
-                exists_action: auto_increment
-                not_exists_action: create
+Acme\BasicCmsBundle\Document\Post:
+    url_schema: /post/{date}/{title}
+    conflict_resolver: [auto_increment, {}]
+    defunct_route_handler: [ leave_redirect, {}]
+    token_providers:
+        date: [content_datetime, {method: getDate, date_format: Y/m/d, slugify: false }]
+        title: [content_method, {method: getTitle}]

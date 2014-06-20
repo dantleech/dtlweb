@@ -25,7 +25,7 @@
         "doctrine/phpcr-odm": "dev-master as 1.0.0",
         "phpcr/phpcr-utils": "dev-master as 1.0.0",
         "jackalope/jackalope-doctrine-dbal": "1.0.0",
-        "symfony-cmf/routing-auto-bundle": "1.0.*@alpha",
+        "symfony-cmf/routing-auto-bundle": "dev-master",
         "symfony-cmf/menu-bundle": "1.0",
         "symfony-cmf/media-bundle": "1.0.1",
         "sonata-project/doctrine-phpcr-admin-bundle": "dev-master",

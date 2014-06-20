@@ -22,6 +22,7 @@ class LoadPageData implements FixtureInterface
         $page = new Page();
         $page->setTitle('Home');
         $page->setParent($rootPage);
+        $page->setPublished(true);
         $page->setContent(<<<HERE
 Welcome to the homepage of this really basic CMS.
 HERE
@@ -31,6 +32,7 @@ HERE
         $page = new PostIndex();
         $page->setTitle('Post Index');
         $page->setParent($rootPage);
+        $page->setPublished(true);
         $page->setContent(<<<HERE
 This is a list of all my posts
 HERE
@@ -40,6 +42,7 @@ HERE
         $page = new Page();
         $page->setTitle('About');
         $page->setParent($rootPage);
+        $page->setPublished(true);
         $page->setContent(<<<HERE
 This page explains what its all about.
 HERE

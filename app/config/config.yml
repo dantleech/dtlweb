@@ -1,7 +1,12 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: routing_auto.yml }
+
+cmf_routing_auto:
+    auto_mapping: false
+    mapping:
+        resources:
+            - ../config/routing_auto.yml
 
 framework:
     #esi:             ~

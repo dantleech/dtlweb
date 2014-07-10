@@ -5,7 +5,7 @@ namespace Acme\BasicCmsBundle\Initializer;
 use Doctrine\Bundle\PHPCRBundle\Initializer\InitializerInterface;
 use PHPCR\SessionInterface;
 use PHPCR\Util\NodeHelper;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
 
 class SiteInitializer implements InitializerInterface
 {

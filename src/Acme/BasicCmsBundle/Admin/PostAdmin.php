@@ -6,7 +6,7 @@ use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Symfony\Component\Form\Extension\Core\DataTransformer\ArrayToDelimitedStringTransformer;
+use DTL\Symfony\Form\DataTransformer\ArrayToDelimitedStringTransformer;
 
 class PostAdmin extends ContentAdmin
 {

@@ -86,8 +86,15 @@
             <argument type="service" id="cmf_menu.factory"/>
             <argument type="service" id="doctrine_phpcr"/>
             <argument>/cms/pages</argument>
+            <call method="setRequest">
+                <argument
+                    type="service"
+                    id="request"
+                    on-invalid="null"
+                    strict="false"
+                />
+            </call>
             <tag name="knp_menu.provider" />
-            <tag name="cmf_request_aware"/>
         </service>
 
         <service

@@ -40,33 +40,26 @@
         {% endfor %}
         <h3 id="comment">Leave a comment</h3>
         <div class="cell">
+                {% if not comment_form.vars.valid %}
+                <div class="color-red cell">
+                    <div class="col width-fit">
+                        <span class="icon icon-warning-sign"></span>
+                    </div>
+                    <div class="col width-fit">
+                        Looks like there are some errors
+                    </div>
+                </div>
+                {% endif %}
                 <form action="#comment" method="POST">
                 <div class="col">
+                    {{ form_errors(comment_form) }}
                     {{ form_row(comment_form.email) }}
                     {{ form_row(comment_form.notify) }}
                     {{ form_row(comment_form.author) }}
-                    <div class="col">
-                        <div class="col width-1of4"><div class="cell"><label>Prove yourself:</label></div></div>
-                        <div class="col width-fill">
-                            {{ form_errors(comment_form.expressionAnswer) }}
-                            <div class="cell">
-                                <input required="yes" type="text" placeholder="Answer the following" name="form[expressionAnswer]" /><br />
-                            <code>{{ expression.expression }}</code><br/>
-                            {% if expression.vars|length %}
-                                Where:
-                                <ul>
-                                {% for varName, varValue in expression.vars %}
-                                    <li><b>${{ varName }}</b> = <b>{{ varValue }}</b></li>
-                                {% endfor %}
-                                </ul><br/>
-                            {% endif %}
-                        </div>
-                        </div>
-                        {{ form_widget(comment_form.expression) }}
-                        {{ form_widget(comment_form.expressionVars) }}
-                        {{ form_widget(comment_form._token) }}
-                    </div>
+                    {{ form_row(comment_form.captcha) }}
                     {{ form_row(comment_form.comment) }}
+                    {{ form_rest(comment_form) }}
+
                     <input type="submit"/>
                 </div>
             </form>

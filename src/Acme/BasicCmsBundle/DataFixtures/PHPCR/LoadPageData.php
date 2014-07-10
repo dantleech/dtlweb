@@ -7,6 +7,7 @@ use Acme\BasicCmsBundle\Document\PostIndex;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelpen;
+use Acme\BasicCmsBundle\Document\ContactPage;
 
 class LoadPageData implements FixtureInterface
 {
@@ -39,6 +40,15 @@ HERE
         );
         $dm->persist($page);
 
+        $page = new ContactPage();
+        $page->setTitle('Contact');
+        $page->setParent($rootPage);
+        $page->setPublished(true);
+        $page->setContent(<<<HERE
+Hey
+HERE
+        );
+        $dm->persist($page);
         $page = new Page();
         $page->setTitle('About');
         $page->setParent($rootPage);

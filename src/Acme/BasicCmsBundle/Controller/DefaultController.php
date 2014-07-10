@@ -188,6 +188,12 @@ class DefaultController extends Controller
      */
     public function postAction(Request $request)
     {
+        $invalidMessages = array(
+            'Oops, that might have been a tricky one. Try again',
+            'Awww, bad luck. Try again',
+            'Pfff. Captchas suck, try again',
+            'Hmmm. Are you human? Try again',
+        );
         $contentDocument = $request->get('contentDocument');
         $this->checkPublished($contentDocument);
 
@@ -202,22 +208,6 @@ class DefaultController extends Controller
         $comment->setExpressionVars($expressionGen->getVars());
         $comment->setParent($contentDocument);
 
-        if ($request->getMethod() == 'POST') {
-            $data = $request->request->get('form');
-            $expression = $data['expression'];
-            $expressionVars = $data['expressionVars'];
-
-            $answer = $expressionLanguage->evaluate(str_replace('$', '', $expression), $expressionVars);
-            $givenAnswer = $data['expressionAnswer'];
-
-            if ($answer != $givenAnswer) {
-                $invalidCaptcha = 'Wrong answer! ' . $expression . ' with ' . var_export($expressionVars, true) . ' is not ' . $givenAnswer;
-            }
-            $data['expressionVars'] = $expressionGen->getVars();
-            $data['expression'] = $expressionGen->getExpression();
-            $request->request->set('form', $data);
-        }
-
         $commentForm = $this->createForm('form', $comment);
         $commentForm->add('email');
         $commentForm->add('notify', 'checkbox', array(
@@ -226,19 +216,11 @@ class DefaultController extends Controller
         ));
         $commentForm->add('author');
         $commentForm->add('comment', 'textarea');
-        $commentForm->add('expressionAnswer', 'text', array(
-            'required' => true,
-        ));
-        $commentForm->add('expression', 'hidden');
-        $commentForm->add('expressionVars', 'collection', array(
-            'type' => 'hidden',
+        $commentForm->add('captcha', 'captcha', array(
+            'invalid_message' => $invalidMessages[rand(0, count($invalidMessages) - 1)],
         ));
        
         $commentForm->handleRequest($request);
-
-        if ($invalidCaptcha) {
-            $commentForm->get('expressionAnswer')->addError(new FormError($invalidCaptcha));
-        }
 
         if ($commentForm->isValid()) {
             $this->getDm()->persist($comment);
@@ -254,7 +236,6 @@ class DefaultController extends Controller
         return array(
             'post' => $contentDocument,
             'comment_form' => $commentForm->createView(),
-            'expression' => $expressionGen,
         );
     }
 
@@ -285,6 +266,7 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder($message)
             ->add('name')
             ->add('email')
+            ->add('captcha', 'captcha')
             ->add('message', 'textarea', array(
                 'attr' => array('cols' => 60, 'rows' => 20)
             ))

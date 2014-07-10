@@ -1,7 +1,15 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: routing_auto.yml }
+
+cmf_routing_auto:
+    auto_mapping: false
+    persistence:
+        phpcr:
+            enabled: true
+    mapping:
+        resources:
+            - ../config/routing_auto.yml
 
 framework:
     #esi:             ~
@@ -115,6 +123,8 @@ cmf_routing:
             Acme\BasicCmsBundle\Document\PostIndex: Acme\BasicCmsBundle\Controller\DefaultController::postIndexAction
             Acme\BasicCmsBundle\Document\Page: Acme\BasicCmsBundle\Controller\DefaultController::pageAction
             Acme\BasicCmsBundle\Document\Post: Acme\BasicCmsBundle\Controller\DefaultController::postAction
+            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute: cmf_routing.redirect_controller:redirectAction
+
 
 sonata_block:
     default_contexts: [cms]
@@ -135,3 +145,5 @@ knp_menu:
 sonata_admin:
     templates:
         layout: AcmeBasicCmsBundle::admin_layout.html.twig
+
+gregwar_captcha: ~

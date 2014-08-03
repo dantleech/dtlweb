@@ -203,6 +203,12 @@ class DefaultController extends Controller
         $expressionGen = $generator->generateExpression();
         $invalidCaptcha = null;
 
+
+        $today = new \DateTime();
+        $diff = $today->diff($contentDocument->getDate());
+        $timeout = 7;
+        $timedout = $diff->days > $timeout;
+
         $comment = new Comment();
         $comment->setExpression($expressionGen->getExpression());
         $comment->setExpressionVars($expressionGen->getVars());
@@ -220,25 +226,25 @@ class DefaultController extends Controller
             'invalid_message' => $invalidMessages[rand(0, count($invalidMessages) - 1)],
         ));
        
-        $commentForm->handleRequest($request);
+        if (false === $timedout) {
+            $commentForm->handleRequest($request);
 
-        if ($commentForm->isValid()) {
-            $this->getDm()->persist($comment);
-            $this->getDm()->flush();
+            if ($commentForm->isValid()) {
+                $this->getDm()->persist($comment);
+                $this->getDm()->flush();
 
-            $commentManager->notifySiteOwer($this->getsite(), $comment);
-            $commentManager->notifySubscribers($this->getSite(), $comment);
+                $commentManager->notifySiteOwer($this->getsite(), $comment);
+                $commentManager->notifySubscribers($this->getSite(), $comment);
 
-            return $this->redirect($this->generateUrl($contentDocument));
+                return $this->redirect($this->generateUrl($contentDocument));
+            }
         }
-
-        $today = new \DateTime();
-        $diff = $today->diff($contentDocument->getDate());
 
         return array(
             'post' => $contentDocument,
             'comment_form' => $commentForm->createView(),
-            'days_old' => $diff->days,
+            'timedout' => $timedout,
+            'timeout' => $timeout,
         );
     }
 

@@ -40,9 +40,10 @@
         {% endfor %}
 
         <h3 id="comment">Leave a comment</h3>
-        {% if days_old > 30 %}
+        {% set timeout = 7 %}
+        {% if days_old > timeout %}
             <div class="cell">
-                <p>This post is more than 30 days old, comments are closed.</p>
+                <p>This post is more than {{ timeout }} days old, comments are closed.</p>
             </div>
         {% else %}
             <div class="cell">

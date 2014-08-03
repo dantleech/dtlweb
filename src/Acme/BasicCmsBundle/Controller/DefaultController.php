@@ -233,7 +233,7 @@ class DefaultController extends Controller
         }
 
         $today = new \DateTime();
-        $today->diff($contentDocument->getDate());
+        $diff = $today->diff($contentDocument->getDate());
 
         return array(
             'post' => $contentDocument,

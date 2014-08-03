@@ -232,10 +232,13 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl($contentDocument));
         }
 
+        $today = new \DateTime();
+        $today->diff($contentDocument->getDate());
 
         return array(
             'post' => $contentDocument,
             'comment_form' => $commentForm->createView(),
+            'days_old' => $diff->days,
         );
     }
 

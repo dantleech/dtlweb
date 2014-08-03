@@ -38,32 +38,39 @@
             <p>No comments yet!</p>
         </div>
         {% endfor %}
-        <h3 id="comment">Leave a comment</h3>
-        <div class="cell">
-                {% if not comment_form.vars.valid %}
-                <div class="color-red cell">
-                    <div class="col width-fit">
-                        <span class="icon icon-warning-sign"></span>
-                    </div>
-                    <div class="col width-fit">
-                        Looks like there are some errors
-                    </div>
-                </div>
-                {% endif %}
-                <form action="#comment" method="POST">
-                <div class="col">
-                    {{ form_errors(comment_form) }}
-                    {{ form_row(comment_form.email) }}
-                    {{ form_row(comment_form.notify) }}
-                    {{ form_row(comment_form.author) }}
-                    {{ form_row(comment_form.captcha) }}
-                    {{ form_row(comment_form.comment) }}
-                    {{ form_rest(comment_form) }}
 
-                    <input type="submit"/>
-                </div>
-            </form>
-        </div>
+        <h3 id="comment">Leave a comment</h3>
+        {% if days_old > 30 %}
+            <div class="cell">
+                <p>This post is more than 30 days old, comments are closed.</p>
+            </div>
+        {% else %}
+            <div class="cell">
+                    {% if not comment_form.vars.valid %}
+                    <div class="color-red cell">
+                        <div class="col width-fit">
+                            <span class="icon icon-warning-sign"></span>
+                        </div>
+                        <div class="col width-fit">
+                            Looks like there are some errors
+                        </div>
+                    </div>
+                    {% endif %}
+                    <form action="#comment" method="POST">
+                    <div class="col">
+                        {{ form_errors(comment_form) }}
+                        {{ form_row(comment_form.email) }}
+                        {{ form_row(comment_form.notify) }}
+                        {{ form_row(comment_form.author) }}
+                        {{ form_row(comment_form.captcha) }}
+                        {{ form_row(comment_form.comment) }}
+                        {{ form_rest(comment_form) }}
+
+                        <input type="submit"/>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 

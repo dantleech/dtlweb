@@ -256,7 +256,7 @@ class DefaultController extends Controller
         $qb = $this->getDm()->getRepository('AcmeBasicCmsBundle:Post')->createQueryBuilder('p');
         $qb->orderBy()->desc()->field('p.date');
         $qb->where()->eq()->field('p.published')->literal(true);
-        $qb->setMaxResults(10);
+        $qb->setMaxResults(4);
         $posts = $qb->getQuery()->execute();
 
         return array(

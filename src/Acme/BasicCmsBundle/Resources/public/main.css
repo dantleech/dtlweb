@@ -31,6 +31,10 @@ h1, h2, h3 {
     margin: 0.5em 0em;
 }
 
+.recentItem {
+    text-overflow: hide;
+}
+
 
 code {
     border-style: none;

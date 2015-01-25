@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col width-fill">
-            <div class="cell">
+            <div class="cell recentItem">
                 <h4><a href="{{ path(post) }}">{{ post.title }}</a></h4>
                 {{ post.content|markdown|striptags|truncate(50) }}
             </div>

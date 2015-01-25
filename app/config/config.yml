@@ -7,6 +7,7 @@ cmf_routing_auto:
     persistence:
         phpcr:
             enabled: true
+            route_basepath: /cms/routes
     mapping:
         resources:
             - ../config/routing_auto.yml
@@ -123,7 +124,7 @@ cmf_routing:
             Acme\BasicCmsBundle\Document\PostIndex: Acme\BasicCmsBundle\Controller\DefaultController::postIndexAction
             Acme\BasicCmsBundle\Document\Page: Acme\BasicCmsBundle\Controller\DefaultController::pageAction
             Acme\BasicCmsBundle\Document\Post: Acme\BasicCmsBundle\Controller\DefaultController::postAction
-            Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute: cmf_routing.redirect_controller:redirectAction
+            cmf_routing_auto.redirect: cmf_routing.redirect_controller:redirectAction
 
 
 sonata_block:

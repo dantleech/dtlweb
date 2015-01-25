@@ -8,9 +8,17 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Knp\Menu\ItemInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
+use FOS\HttpCacheBundle\CacheManager;
 
 class ContentAdmin extends Admin
 {
+    protected $cacheManager;
+
+    public function setCacheManager(CacheManager $cacheManager)
+    {
+        $this->cacheManager = $cacheManager;
+    }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -40,6 +48,16 @@ class ContentAdmin extends Admin
     {
         $parent = $this->getModelManager()->find(null, '/cms/pages/main');
         $document->setParent($parent);
+    }
+
+    public function postPersist($document)
+    {
+        $this->cacheManager->invalidateTags($document->getCacheTags());
+    }
+
+    public function postUpdate($document)
+    {
+        $this->cacheManager->invalidateTags($document->getCacheTags());
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

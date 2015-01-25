@@ -45,9 +45,21 @@ trait ContentTrait
     protected $children;
 
     /**
+     * @PHPCR\Uuid()
+     */
+    protected $uuid;
+
+    /**
      * @PHPCR\Boolean(nullable=true)
      */
     protected $published = false;
+
+    public function getCacheTags()
+    {
+        return array(
+            'content-' . $this->uuid
+        );
+    }
 
     public function getId()
     {

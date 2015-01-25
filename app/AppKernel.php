@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new DTL\ExpressionCaptchaFormTypeBundle\DTLExpressionCaptchaFormTypeBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
 
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );

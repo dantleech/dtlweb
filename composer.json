@@ -9,7 +9,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
-        "doctrine/orm": "~2.2,>=2.2.3",
+        "doctrine/orm": "~2.2",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
@@ -20,23 +20,24 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
 
-        "doctrine/phpcr-bundle": "dev-master as 1.0.0",
+        "doctrine/phpcr-bundle": "~1.2",
         "doctrine/doctrine-bundle": "1.2.*",
-        "doctrine/phpcr-odm": "dev-master as 1.0.0",
-        "phpcr/phpcr-utils": "dev-master as 1.0.0",
-        "jackalope/jackalope-doctrine-dbal": "1.0.0",
-        "symfony-cmf/routing-auto-bundle": "dev-master",
+        "doctrine/phpcr-odm": "~1.2",
+        "phpcr/phpcr-utils": "~1.1",
+        "phpcr/phpcr-shell": "~1.0",
+        "jackalope/jackalope-doctrine-dbal": "~1.1",
+        "symfony-cmf/routing-auto-bundle": "~1.0",
         "symfony-cmf/menu-bundle": "~1.1",
-        "sonata-project/doctrine-phpcr-admin-bundle": "dev-master",
+        "friendsofsymfony/http-cache-bundle": "~1.1",
+        "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
         "doctrine/data-fixtures": "1.0.0",
-        "dantleech/phpcr-taxonomy-bundle": "dev-master",
-        "white-october/pagerfanta-bundle": "dev-master",
+        "dantleech/phpcr-taxonomy-bundle": "~1.0",
+        "white-october/pagerfanta-bundle": "~1.0",
 
-        "knplabs/knp-markdown-bundle": "1.2.*@dev",
+        "knplabs/knp-markdown-bundle": "~1.2.0",
 
         "dantleech/symfony-form-array-to-delimited-string-transformer": "dev-master",
-        "gregwar/captcha-bundle": "dev-master"
-
+        "gregwar/captcha-bundle": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [

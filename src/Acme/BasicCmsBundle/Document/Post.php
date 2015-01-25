@@ -11,7 +11,7 @@ use Acme\BasicCmsBundle\Document\Comment;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Post implements RouteReferrersReadInterface
+class Post implements RouteReferrersReadInterface, TaggedInterface
 {
     use ContentTrait;
 

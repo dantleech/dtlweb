@@ -148,3 +148,20 @@ sonata_admin:
         layout: AcmeBasicCmsBundle::admin_layout.html.twig
 
 gregwar_captcha: ~
+
+fos_http_cache:
+    proxy_client:
+        varnish:
+            servers: %varnish_servers%
+            base_url: 127.0.0.1:8000
+    cache_control:
+        defaults:
+            overwrite: true
+        rules:
+            # only match login.example.com
+            -
+                match:
+                    host: ^.*$ #^login.example.com$
+                headers:
+                    cache_control: { public: true, max_age: 604800, s_maxage: 604800 }
+                    vary: [Accept-Encoding, Accept-Language]

@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @PHPCR\Document(referenceable=true)
  */
-class Page implements RouteReferrersReadInterface, NodeInterface
+class Page implements RouteReferrersReadInterface, NodeInterface, TaggedInterface
 {
     use ContentTrait;
 

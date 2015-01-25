@@ -1,12 +1,12 @@
 Acme\BasicCmsBundle\Document\Page:
-    url_schema: /page/{title}
+    uri_schema: /page/{title}
     conflict_resolver: [auto_increment, {}]
     defunct_route_handler: [ leave_redirect, {} ]
     token_providers:
         title: [content_method, { method: getTitle }]
 
 Acme\BasicCmsBundle\Document\Post:
-    url_schema: /post/{date}/{title}
+    uri_schema: /post/{date}/{title}
     conflict_resolver: [auto_increment, {}]
     defunct_route_handler: [ leave_redirect, {}]
     token_providers:

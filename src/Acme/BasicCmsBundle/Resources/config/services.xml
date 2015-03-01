@@ -32,9 +32,9 @@
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
-            <call method="setCacheManager">
-                <argument type="service" id="fos_http_cache.cache_manager" />
-            </call>
+            <!-- <call method="setCacheManager"> -->
+            <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
+            <!-- </call> -->
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -71,9 +71,9 @@
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
 
-            <call method="setCacheManager">
-                <argument type="service" id="fos_http_cache.cache_manager" />
-            </call>
+            <!-- <call method="setCacheManager"> -->
+            <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
+            <!-- </call> -->
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -109,12 +109,12 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service
-            id="acme.basic_cms.subscriber.kernel"
-            class="Acme\BasicCmsBundle\EventSubscriber\KernelSubscriber">
-            <argument type="service" id="fos_http_cache.cache_manager" />
-            <tag name="kernel.event_subscriber" />
-        </service>
+        <!-- <service -->
+        <!-- id="acme.basic_cms.subscriber.kernel" -->
+        <!-- class="Acme\BasicCmsBundle\EventSubscriber\KernelSubscriber"> -->
+        <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
+        <!-- <tag name="kernel.event_subscriber" /> -->
+        <!-- </service> -->
 
     </services>
 

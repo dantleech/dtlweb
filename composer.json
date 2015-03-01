@@ -33,6 +33,7 @@
         "doctrine/data-fixtures": "1.0.0",
         "dantleech/phpcr-taxonomy-bundle": "~1.0",
         "white-october/pagerfanta-bundle": "~1.0",
+        "symfony-cmf/resource-rest-bundle": "dev-sonata_admin",
 
         "knplabs/knp-markdown-bundle": "~1.2.0",
 

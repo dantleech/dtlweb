@@ -11,3 +11,12 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin
+
+_cmf_resource:
+    pattern: /api/{repositoryName}{path}
+
+    requirements:
+        path: .*
+    defaults:
+        _controller: cmf_resource_rest.controller.resource:resourceAction
+        _format: json

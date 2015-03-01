@@ -20,4 +20,3 @@ parameters:
     phpcr_pass: admin
     site_password: dan3bleach
     contact_email: daniel@dantleech.com
-    varnish_servers: [ 127.0.0.1:6081 ]

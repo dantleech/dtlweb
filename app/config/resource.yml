@@ -1,0 +1,19 @@
+cmf_resource:
+    repository:
+        doctrine_phpcr_odm:
+            cms:
+                basepath: /cms
+
+cmf_resource_rest:
+    payload_alias_map:
+        post:
+            repository: doctrine_phpcr_odm
+            type: "Acme\\BasicCmsBundle\\Document\\Post"
+        page:
+            repository: doctrine_phpcr_odm
+            type: "Acme\\BasicCmsBundle\\Document\\Page"
+
+    enhancer_map:
+        -
+            repository: cms
+            enhancer: sonata_admin

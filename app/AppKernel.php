@@ -34,11 +34,6 @@ class AppKernel extends Kernel
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
 
-            new Symfony\Cmf\Bundle\ResourceBundle\CmfResourceBundle(),
-            new Symfony\Cmf\Bundle\ResourceRestBundle\CmfResourceRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );
 

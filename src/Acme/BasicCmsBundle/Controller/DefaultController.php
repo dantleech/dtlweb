@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Acme\BasicCmsBundle\Document\Comment;
 use Acme\BasicCmsBundle\Document\Message;
 use Symfony\Component\Form\FormError;
+use DTL\TaggedHttpCache\TaggedCache;
 
 class DefaultController extends Controller
 {
@@ -49,9 +50,6 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl($homepage));
     }
 
-    /**
-     * @Template()
-     */
     public function pageAction($contentDocument, $isHomepage = false)
     {
         $this->checkPublished($contentDocument);
@@ -60,11 +58,19 @@ class DefaultController extends Controller
         $posts = $dm->getRepository('Acme\BasicCmsBundle\Document\Post')->findAll();
         $isHomepage = $this->getSite()->getHomepage() === $contentDocument;
 
-        return array(
-            'page'  => $contentDocument,
-            'posts' => $posts,
-            'is_homepage' => $isHomepage,
+        $response = $this->render(
+            'AcmeBasicCmsBundle:Default:page.html.twig',
+            array(
+                'page'  => $contentDocument,
+                'posts' => $posts,
+                'is_homepage' => $isHomepage,
+            )
         );
+        $response->headers->set(TaggedCache::HEADER_TAGS, json_encode($contentDocument->getCacheTags()));
+        $response->setMaxAge(1000);
+        $response->setSharedMaxAge(1000);
+
+        return $response;
     }
 
     public function tagCloudAction()

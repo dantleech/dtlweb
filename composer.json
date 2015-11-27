@@ -6,6 +6,12 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dantleech/tagged-symfony-cache"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.4",
@@ -19,21 +25,20 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
+        "dantleech/tagged-http-cache": "dev-master",
 
         "doctrine/phpcr-bundle": "~1.2",
         "doctrine/doctrine-bundle": "1.2.*",
         "doctrine/phpcr-odm": "~1.2",
         "phpcr/phpcr-utils": "~1.1",
-        "phpcr/phpcr-shell": "~1.0",
+        "phpcr/phpcr-shell": "~1.0@dev",
         "jackalope/jackalope-doctrine-dbal": "~1.1",
         "symfony-cmf/routing-auto-bundle": "~1.0",
         "symfony-cmf/menu-bundle": "~1.1",
-        "friendsofsymfony/http-cache-bundle": "~1.1",
         "sonata-project/doctrine-phpcr-admin-bundle": "~1.1",
         "doctrine/data-fixtures": "1.0.0",
-        "dantleech/phpcr-taxonomy-bundle": "~1.0",
+        "dantleech/phpcr-taxonomy-bundle": "~1.0@dev",
         "white-october/pagerfanta-bundle": "~1.0",
-        "symfony-cmf/resource-rest-bundle": "dev-sonata_admin",
 
         "knplabs/knp-markdown-bundle": "~1.2.0",
 
@@ -59,7 +64,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "minimum-stability": "dev",
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

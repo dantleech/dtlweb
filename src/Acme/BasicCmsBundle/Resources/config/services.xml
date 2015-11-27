@@ -19,22 +19,19 @@
     -->
 
     <services>
-        <!-- ... -->
-
         <service id="acme.phpcr.initializer.site"
             class="Acme\BasicCmsBundle\Initializer\SiteInitializer">
             <tag name="doctrine_phpcr.initializer"/>
         </service>
 
-        <service id="acme.basic_cms.admin.page"
-            class="Acme\BasicCmsBundle\Admin\PageAdmin">
+        <service id="acme.basic_cms.admin.page" class="Acme\BasicCmsBundle\Admin\PageAdmin">
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
-            <!-- <call method="setCacheManager"> -->
-            <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
-            <!-- </call> -->
+            <call method="setTagManager">
+                <argument type="service" id="tagged_http_cache.tag_manager" />
+            </call>
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -64,16 +61,15 @@
             <argument>SonataAdminBundle:CRUD</argument>
         </service>
 
-        <service id="acme.basic_cms.admin.post"
-            class="Acme\BasicCmsBundle\Admin\PostAdmin">
+        <service id="acme.basic_cms.admin.post" class="Acme\BasicCmsBundle\Admin\PostAdmin">
 
             <call method="setRouteBuilder">
                 <argument type="service" id="sonata.admin.route.path_info_slashes" />
             </call>
 
-            <!-- <call method="setCacheManager"> -->
-            <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
-            <!-- </call> -->
+            <call method="setTagManager">
+                <argument type="service" id="tagged_http_cache.tag_manager" />
+            </call>
             <tag
                 name="sonata.admin"
                 manager_type="doctrine_phpcr"
@@ -108,13 +104,6 @@
             <argument type="service" id="mailer" />
             <argument type="service" id="twig" />
         </service>
-
-        <!-- <service -->
-        <!-- id="acme.basic_cms.subscriber.kernel" -->
-        <!-- class="Acme\BasicCmsBundle\EventSubscriber\KernelSubscriber"> -->
-        <!-- <argument type="service" id="fos_http_cache.cache_manager" /> -->
-        <!-- <tag name="kernel.event_subscriber" /> -->
-        <!-- </service> -->
 
     </services>
 

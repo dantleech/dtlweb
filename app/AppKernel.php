@@ -2,9 +2,18 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use DTL\TaggedHttpCache\TagManagerInterface;
 
 class AppKernel extends Kernel
 {
+    private $tagManager;
+
+    public function __construct($environment, $debug, TagManagerInterface $tagManager = null)
+    {
+        $this->tagManager = $tagManager;
+        parent::__construct($environment, $debug);
+    }
+
     public function registerBundles()
     {
         $bundles = array(
@@ -13,7 +22,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
@@ -32,7 +40,6 @@ class AppKernel extends Kernel
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new DTL\ExpressionCaptchaFormTypeBundle\DTLExpressionCaptchaFormTypeBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-            new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
 
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
         );
@@ -50,5 +57,11 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function boot()
+    {
+        parent::boot();
+        $this->getContainer()->set('tagged_http_cache.tag_manager', $this->tagManager);
     }
 }

@@ -9,14 +9,15 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Knp\Menu\ItemInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use FOS\HttpCacheBundle\CacheManager;
+use DTL\TaggedHttpCache\TagManager;
 
 class ContentAdmin extends Admin
 {
-    protected $cacheManager;
+    protected $tagManager;
 
-    public function setCacheManager(CacheManager $cacheManager)
+    public function setTagManager(TagManager $tagManager)
     {
-        $this->cacheManager = $cacheManager;
+        $this->tagManager = $tagManager;
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -52,12 +53,12 @@ class ContentAdmin extends Admin
 
     public function postPersist($document)
     {
-        $this->cacheManager->invalidateTags($document->getCacheTags());
+        $this->tagManager->invalidateTags($document->getCacheTags());
     }
 
     public function postUpdate($document)
     {
-        $this->cacheManager->invalidateTags($document->getCacheTags());
+        $this->tagManager->invalidateTags($document->getCacheTags());
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

@@ -22,7 +22,10 @@ Debug::enable();
 
 require_once __DIR__.'/../app/AppKernel.php';
 
-$kernel = new AppKernel('dev', true);
+$store = new Store(__DIR__ . '/../app/cache/http_cache');
+$tagManager = new TagManager($store, __DIR__ . '/../app/cache/http_cache_tags');
+
+$kernel = new AppKernel('dev', true, $tagManager);
 $kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);

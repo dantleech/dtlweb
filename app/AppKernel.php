@@ -3,6 +3,8 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use DTL\TaggedHttpCache\TagManagerInterface;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 class AppKernel extends Kernel
 {
@@ -59,9 +61,21 @@ class AppKernel extends Kernel
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
 
-    public function boot()
+    protected function buildContainer()
     {
-        parent::boot();
-        $this->getContainer()->set('tagged_http_cache.tag_manager', $this->tagManager);
+        $container = parent::buildContainer();
+        $definition = new Definition('DTL\TaggedHttpCache\TagManager');
+        $definition->setFactory(array(
+            new Reference('kernel'),
+            'getTagManager'
+        ));
+        $container->setDefinition('tagged_http_cache.tag_manager', $definition);
+
+        return $container;
+    }
+
+    public function getTagManager()
+    {
+        return $this->tagManager;
     }
 }

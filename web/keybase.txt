@@ -1,0 +1,64 @@
+==================================================================
+https://keybase.io/dantleech
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.dantleech.com
+  * I am dantleech (https://keybase.io/dantleech) on keybase.
+  * I have a public key with fingerprint 63EF 99FF 349C 7EF1 E216  4B0B BFC7 2379 AB91 4693
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "63ef99ff349c7ef1e2164b0bbfc72379ab914693",
+            "host": "keybase.io",
+            "key_id": "bfc72379ab914693",
+            "uid": "ccf33147fcce8feaa534f68e2bd10100",
+            "username": "dantleech"
+        },
+        "service": {
+            "hostname": "www.dantleech.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1410971304,
+    "expire_in": 157680000,
+    "prev": "7a6df1b36dc5bdfa56f490083c6b503f64b59a3ec99d39188a661168daa074f5",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2
+
+owFtkWtIFFEUx3dXK9taCQqtVKoRTMV0Zuc9BJFU0MOybMM+rTN37tUpndl2Z7Vt
+E6NAkwrUovoWIVIQEppGD0ShjXymbGT2sCTMKCr1Q2SC2B2xPnW/XO7//M7/nHNP
+nSvG5rB3PksN3anfddne1zWj2A6vu38vTCiGGiKkMHEcLlxI04uh3+fXdJOQCI6G
+SBQRohkR8BBR0E1xjEIqCgK8m+ZFWREphhNpIosoMQJWBrZR5ADM1gys4YdXU7H6
+Hz64EAAA0TTF8AgAKCAoyyzNIE6AbkWlSIokLTAA/bpcBjGtyrpZCiEoISqzCCyX
+awBaTVu1F5GKiorsf1g2MMqwg89vmAYwSnG4xDR9kpVthnwLOFS8i0ZeRdNVPD1O
+KIf+gGbohERhEpia5UwxFCnyFE0yWQQ86dP80KtZBMtzAomPVQaWY0te5lREKTSn
+AlZRkcxyiBFJUqABp7AkjfAHsqJMQyCKKi1SgiBzHEVxgirLJM8glrBGO6EbhIQr
+mXIxtgxoxbpsBv2QqHTW2pNjbXaHbekSh7VAm3P5qr9rndwfZ6vd0DIamY9/7j7W
+XNATKXJ4f0+1ikrvfCrHZnoOvZ6EvRVPd6REUzK+v48BY1UX8qWGdhtzqd4125g2
+HHnYIbzacrea2xM73LL5bFscVb86UvhyIm/Tp6hzPJgnNfcneJ+4ctNzPjzOmHNV
+a12npxLJaHDlrcnK7dcf7W4F0cbpZcghFCRt/Hayyun5sa+m4+DFtyum390YXH9E
+v9nzZmiifW3hToeWWzTsvjI29LEszdMd6j7XcrXTHafF9zxobAjn305+4WlKnp3b
+6+9rbfuZMyKtyZRnjg7IA57BXxMJdafOj3zZFpaaPs+PmmcCody5pK3p12r6D4x/
+TczP+QM=
+=f6yR
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dantleech
+
+==================================================================

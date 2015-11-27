@@ -67,8 +67,7 @@ class DefaultController extends Controller
             )
         );
         $response->headers->set(TaggedCache::HEADER_TAGS, json_encode($contentDocument->getCacheTags()));
-        $response->setMaxAge(1000);
-        $response->setSharedMaxAge(1000);
+        $response->setPublic();
 
         return $response;
     }
@@ -245,13 +244,19 @@ class DefaultController extends Controller
                 return $this->redirect($this->generateUrl($contentDocument));
             }
         }
-
-        return array(
-            'post' => $contentDocument,
-            'comment_form' => $commentForm->createView(),
-            'timedout' => $timedout,
-            'timeout' => $timeout,
+        $response = $this->render(
+            'AcmeBasicCmsBundle:Default:post.html.twig',
+            array(
+                'post' => $contentDocument,
+                'comment_form' => $commentForm->createView(),
+                'timedout' => $timedout,
+                'timeout' => $timeout,
+            )
         );
+        $response->headers->set(TaggedCache::HEADER_TAGS, json_encode($contentDocument->getCacheTags()));
+        $response->setPublic();
+
+        return $response;
     }
 
     /**

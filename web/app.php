@@ -25,7 +25,7 @@ $store = new Store(__DIR__ . '/../app/cache/http_cache');
 $tagManager = new TagManager($store, __DIR__ . '/../app/cache/http_cache_tags');
 $appKernel = new AppKernel('prod', false, $tagManager);
 $appKernel->loadClassCache();
-$kernel = new HttpCache($appKernel, $store);
+$kernel = new HttpCache($appKernel, $store, null, array('default_ttl' => (3600 * 24 * 60)));
 $kernel = new TaggedCache($kernel, $tagManager);
 
 // When using the HttpCache, you need to call the method in your front controller instead of relying on the configuration parameter

@@ -10,12 +10,13 @@ use Knp\Menu\ItemInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use FOS\HttpCacheBundle\CacheManager;
 use DTL\TaggedHttpCache\TagManager;
+use DTL\TaggedHttpCache\TagManagerInterface;
 
 class ContentAdmin extends Admin
 {
     protected $tagManager;
 
-    public function setTagManager(TagManager $tagManager)
+    public function setTagManager(TagManagerInterface $tagManager)
     {
         $this->tagManager = $tagManager;
     }

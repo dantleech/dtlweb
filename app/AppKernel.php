@@ -10,7 +10,7 @@ class AppKernel extends Kernel
 {
     private $tagManager;
 
-    public function __construct($environment, $debug, TagManagerInterface $tagManager = null)
+    public function __construct($environment, $debug, TagManagerInterface $tagManager)
     {
         $this->tagManager = $tagManager;
         parent::__construct($environment, $debug);

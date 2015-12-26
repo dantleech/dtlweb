@@ -13,6 +13,7 @@ require_once __DIR__.'/AppKernel.php';
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
+use DTL\TaggedHttpCache\NullTagManager;
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');
@@ -22,6 +23,6 @@ if ($debug) {
    # Debug::enable();
 }
 
-$kernel = new AppKernel($env, $debug);
+$kernel = new AppKernel($env, $debug, new NullTagManager());
 $application = new Application($kernel);
 $application->run($input);

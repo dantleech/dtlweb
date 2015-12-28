@@ -43,7 +43,8 @@
         "knplabs/knp-markdown-bundle": "~1.2.0",
 
         "dantleech/symfony-form-array-to-delimited-string-transformer": "dev-master",
-        "gregwar/captcha-bundle": "~1.0"
+        "gregwar/captcha-bundle": "~1.0",
+        "nelmio/api-doc-bundle": "~2.11"
     },
     "scripts": {
         "post-install-cmd": [

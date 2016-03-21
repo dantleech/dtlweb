@@ -25,7 +25,7 @@
         "sensio/framework-extra-bundle": "~3.0",
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
-        "dantleech/tagged-http-cache": "dev-master",
+        "dantleech/sf-http-cache-tagging": "dev-dev",
 
         "doctrine/phpcr-bundle": "~1.2",
         "doctrine/doctrine-bundle": "1.2.*",
@@ -44,7 +44,8 @@
 
         "dantleech/symfony-form-array-to-delimited-string-transformer": "dev-master",
         "gregwar/captcha-bundle": "~1.0",
-        "nelmio/api-doc-bundle": "~2.11"
+        "nelmio/api-doc-bundle": "~2.11",
+        "mopa/bootstrap-bundle": "^3.0"
     },
     "scripts": {
         "post-install-cmd": [
@@ -74,5 +75,11 @@
         "branch-alias": {
             "dev-master": "2.4-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:dantleech/sf-http-cache-tagging.git"
+        }
+    ]
 }

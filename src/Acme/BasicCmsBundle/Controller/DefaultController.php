@@ -12,6 +12,7 @@ use Acme\BasicCmsBundle\Document\Comment;
 use Acme\BasicCmsBundle\Document\Message;
 use Symfony\Component\Form\FormError;
 use DTL\TaggedHttpCache\TaggedCache;
+use DTL\Symfony\HttpCacheTagging\TaggingHandler;
 
 class DefaultController extends Controller
 {
@@ -66,7 +67,7 @@ class DefaultController extends Controller
                 'is_homepage' => $isHomepage,
             )
         );
-        $response->headers->set(TaggedCache::HEADER_TAGS, json_encode($contentDocument->getCacheTags()));
+        $response->headers->set('X-Cache-Tags', json_encode($contentDocument->getCacheTags()));
         $response->setPublic();
 
         return $response;

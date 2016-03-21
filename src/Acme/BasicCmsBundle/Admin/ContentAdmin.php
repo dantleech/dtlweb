@@ -9,8 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Knp\Menu\ItemInterface;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use FOS\HttpCacheBundle\CacheManager;
-use DTL\TaggedHttpCache\TagManager;
-use DTL\TaggedHttpCache\TagManagerInterface;
+use DTL\Symfony\HttpCacheTagging\TagManagerInterface;
 
 class ContentAdmin extends Admin
 {

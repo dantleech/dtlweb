@@ -2,18 +2,18 @@
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use DTL\TaggedHttpCache\TagManagerInterface;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use DTL\Symfony\HttpCacheTagging\TagManagerInterface;
+use DTL\Symfony\HttpCacheTagging\Manager\NullTagManager;
 
 class AppKernel extends Kernel
 {
     private $tagManager;
 
-    public function __construct($environment, $debug, TagManagerInterface $tagManager)
+    public function setTagManager(TagManagerInterface $tagManager)
     {
         $this->tagManager = $tagManager;
-        parent::__construct($environment, $debug);
     }
 
     public function registerBundles()
@@ -45,6 +45,7 @@ class AppKernel extends Kernel
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
 
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -65,7 +66,7 @@ class AppKernel extends Kernel
     protected function buildContainer()
     {
         $container = parent::buildContainer();
-        $definition = new Definition('DTL\TaggedHttpCache\TagManager');
+        $definition = new Definition('DTL\Symfony\HttpCacheTagging\Manager\TagManager');
         $definition->setFactory(array(
             new Reference('kernel'),
             'getTagManager'
@@ -77,6 +78,6 @@ class AppKernel extends Kernel
 
     public function getTagManager()
     {
-        return $this->tagManager;
+        return $this->tagManager ?: new NullTagManager();
     }
 }
